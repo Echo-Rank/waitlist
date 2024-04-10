@@ -8,7 +8,7 @@ export default function Home() {
   return (
     <>
       <Toaster />
-      <section className="w-screen min-h-dvh grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#e9ecef]">
+      <section className="w-screen min-h-dvh grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#e9ecef] relative">
         <div className="md:h-full h-80 bg-[#212529] relative overflow-hidden">
           <Image
             src="/waitlist.png"
@@ -38,14 +38,6 @@ export default function Home() {
               Rank, Rate, Relive.
             </h1>
           </div>
-          <div className="hidden md:flex justify-end space-x-2">
-            <Link href="https://twitter.com/echo.rank" target="_blank">
-              <FaXTwitter className="text-zinc-900 w-6 h-6" />
-            </Link>
-            <Link href="https://instagram.com/echo.rank" target="_blank">
-              <FaInstagram className="text-zinc-900 w-6 h-6" />
-            </Link>
-          </div>
           <p className="text-zinc-700">
             Welcome to <strong>Echo</strong>.
             <br />
@@ -56,6 +48,14 @@ export default function Home() {
           </p>
           <EmailForm />
         </main>
+        <div className="hidden md:flex justify-end space-x-2 absolute top-4 right-4">
+          <Link href="https://twitter.com/echo.rank" target="_blank">
+            <FaXTwitter className="text-zinc-900 w-6 h-6" />
+          </Link>
+          <Link href="https://instagram.com/echo.rank" target="_blank">
+            <FaInstagram className="text-zinc-900 w-6 h-6" />
+          </Link>
+        </div>
       </section>
     </>
   );
