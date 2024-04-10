@@ -11,7 +11,10 @@ export async function POST(request: NextRequest) {
     const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
     const MAILCHIMP_SERVER_PREFIX = process.env.MAILCHIMP_API_SERVER;
     const MAILCHIMP_AUDIENCE_ID= process.env.MAILCHIMP_AUDIENCE_ID;
-    
+
+    if (!MAILCHIMP_API_KEY || !MAILCHIMP_SERVER_PREFIX || !MAILCHIMP_AUDIENCE_ID) {
+      return new NextResponse(JSON.stringify({ error: 'Mailchimp configuration is missing' }), { status: 500 });
+    }
     console.log('MAILCHIMP_API_KEY:', MAILCHIMP_API_KEY);
     console.log('MAILCHIMP_SERVER_PREFIX:', MAILCHIMP_SERVER_PREFIX);
     console.log('MAILCHIMP_AUDIENCE_ID:', MAILCHIMP_AUDIENCE_ID);
