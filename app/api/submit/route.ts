@@ -2,16 +2,21 @@ export async function POST(request: Request) {
   const { email } = await request.json();
 
   try {
+    const MAILCHIMP_API_KEY = process.env.MAILCHIMP_API_KEY;
+    const MAILCHIMP_SERVER = MAILCHIMP_API_KEY.split("-")[1];
+    const MAILCHIMP_LIST_ID = process.env.MAILCHIMP_LIST_ID;
+
     const response = await fetch(
-      `https://emailoctopus.com/api/1.6/lists/${process.env.LIST_ID}/contacts`,
+      `https://${MAILCHIMP_SERVER}.api.mailchimp.com/3.0/lists/${MAILCHIMP_LIST_ID}/members`,
       {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
+          Authorization: `apikey ${MAILCHIMP_API_KEY}`,
         },
         body: JSON.stringify({
-          api_key: `${process.env.EMAILOCTOPUS_KEY}`,
           email_address: email,
+          status: "subscribed",
         }),
       }
     );
@@ -21,12 +26,15 @@ export async function POST(request: Request) {
         status: 200,
       });
     } else {
-      return new Response("Failed to submit email!", {
+      const errorData = await response.json();
+      return new Response(errorData.title || "Failed to submit email!", {
         status: response.status,
         statusText: response.statusText,
       });
     }
   } catch (error) {
-    return new Response("Internal server error", { status: 500 });
+    return new Response("Internal server error", {
+      status: 500,
+    });
   }
 }
