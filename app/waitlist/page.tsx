@@ -29,7 +29,7 @@ export default function Home() {
             </h1>
           </div>
           <p className="text-zinc-700">
-            Welcome to Echo. <br />
+            Welcome to <strong>Echo</strong>. <br />
             Rank your favorite albums, share your ratings with friends, and
             discover new music. <br />
             Join our waitlist to be notified when Echo launches.
