@@ -1,6 +1,8 @@
 import EmailForm from "@/components/EmailForm";
 import Image from "next/image";
+import Link from "next/link";
 import { Toaster } from "react-hot-toast";
+import { FaXTwitter, FaInstagram } from "react-icons/fa6";
 
 export default function Home() {
   return (
@@ -16,6 +18,14 @@ export default function Home() {
           />
         </div>
         <main className="flex flex-col gap-8 justify-center px-6 pb-10">
+          <div className="md:hidden flex justify-end space-x-2 mt-4">
+            <Link href="https://twitter.com/echorankapp" target="_blank">
+              <FaXTwitter className="text-zinc-900 w-6 h-6" />
+            </Link>
+            <Link href="https://instagram.com/echo.rank" target="_blank">
+              <FaInstagram className="text-zinc-900 w-6 h-6" />
+            </Link>
+          </div>
           <div className="flex flex-row items-center">
             <Image
               style={{ marginLeft: "-20px" }}
@@ -28,10 +38,20 @@ export default function Home() {
               Rank, Rate, Relive.
             </h1>
           </div>
+          <div className="hidden md:flex justify-end space-x-2">
+            <Link href="https://twitter.com/echo.rank" target="_blank">
+              <FaXTwitter className="text-zinc-900 w-6 h-6" />
+            </Link>
+            <Link href="https://instagram.com/echo.rank" target="_blank">
+              <FaInstagram className="text-zinc-900 w-6 h-6" />
+            </Link>
+          </div>
           <p className="text-zinc-700">
-            Welcome to <strong>Echo</strong>. <br />
+            Welcome to <strong>Echo</strong>.
+            <br />
             Rank your favorite albums, share your ratings with friends, and
-            discover new music. <br />
+            discover new music.
+            <br />
             Join our waitlist to be notified when Echo launches.
           </p>
           <EmailForm />
