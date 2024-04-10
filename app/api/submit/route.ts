@@ -38,10 +38,10 @@ export async function POST(request: NextRequest) {
     
     if (!response.ok) {
       const errorData = await response.json();
-      return new NextResponse(JSON.stringify({ error: errorData.title || "Failed to subscribe to the newsletter." }), { status: 400 });
+      return new NextResponse(JSON.stringify({ error: errorData.title || "Failed to join the waitlist." }), { status: 400 });
     }
     
-    return new NextResponse(JSON.stringify({ message: "Subscribed successfully" }), { status: 201 });
+    return new NextResponse(JSON.stringify({ message: "Joined successfully" }), { status: 201 });
   } catch (error: any) {
     return new NextResponse(JSON.stringify({ error: error.message || "Internal server error" }), { status: 500 });
   }

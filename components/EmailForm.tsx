@@ -28,7 +28,7 @@ export default function EmailForm() {
         toast.success("Thank you for joining our waitlist! 🚀");
       } else {
         setEmail("");
-        toast.error(data.error || "Oops! Something went wrong!");
+        toast.error("Oops! Something went wrong!");
       }
     } catch (err) {
       setEmail("");
