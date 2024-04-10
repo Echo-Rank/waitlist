@@ -1,4 +1,4 @@
-import EmailForm from "@/components/EmailFom";
+import EmailForm from "@/components/EmailForm";
 import Image from "next/image";
 import { Toaster } from "react-hot-toast";
 

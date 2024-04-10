@@ -6,7 +6,7 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Echo",
+  title: "Echo - Waitlist",
   description: "Rank. Rate. Relive.",
   icons: {
     icon: "/EchoLarge.png",
