@@ -4,15 +4,14 @@ import { useState } from "react";
 import { toast } from "react-hot-toast";
 
 export default function EmailForm() {
-  const [email, setEmail] = useState<string>();
+  const [email, setEmail] = useState<string>("");
 
-  const handleEmailChange = (e: any) => {
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setEmail(e.target.value);
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     try {
       const response = await fetch("/api/submit", {
         method: "POST",
@@ -22,12 +21,14 @@ export default function EmailForm() {
         body: JSON.stringify({ email }),
       });
 
+      const data = await response.json();
+
       if (response.ok) {
         setEmail("");
         toast.success("Thank you for joining our waitlist! 🚀");
       } else {
         setEmail("");
-        toast.error("Oops! Something went wrong!");
+        toast.error(data.error || "Oops! Something went wrong!");
       }
     } catch (err) {
       setEmail("");
