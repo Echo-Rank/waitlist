@@ -32,7 +32,6 @@ export default function Home() {
           <p className="text-zinc-700">
             Welcome to Echo. 
             <br />
-            <br />
             Rank your favorite albums, share your ratings with
             friends, and discover new music. 
             <br />
