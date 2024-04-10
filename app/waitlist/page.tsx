@@ -4,7 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
-import { FaXTwitter, FaInstagram } from "react-icons/fa6";
+import { FaXTwitter, FaInstagram, FaTiktok } from "react-icons/fa6";
 
 export default function Home() {
 
@@ -27,7 +27,10 @@ export default function Home() {
           />
         </div>
         <main className="flex flex-col gap-8 justify-center px-6 pb-10">
-          <div className="md:hidden flex justify-end space-x-2 mt-4">
+          <div className="md:hidden flex justify-end space-x-4 mt-4">
+          <Link href="https://tiktok.com/@echorankapp" target="_blank">
+              <FaTiktok className="text-zinc-900 w-6 h-6" />
+            </Link>
             <Link href="https://twitter.com/echorankapp" target="_blank">
               <FaXTwitter className="text-zinc-900 w-6 h-6" />
             </Link>
@@ -57,12 +60,15 @@ export default function Home() {
           </p>
           <EmailForm />
         </main>
-        <div className="hidden md:flex justify-end space-x-2 absolute top-4 right-4">
+        <div className="hidden md:flex justify-end space-x-4 absolute top-4 right-4">
           <Link href="https://twitter.com/echo.rank" target="_blank">
             <FaXTwitter className="text-zinc-900 w-6 h-6" />
           </Link>
           <Link href="https://instagram.com/echo.rank" target="_blank">
             <FaInstagram className="text-zinc-900 w-6 h-6" />
+          </Link>
+          <Link href="https://tiktok.com/@echorankapp" target="_blank">
+            <FaTiktok className="text-zinc-900 w-6 h-6" />
           </Link>
         </div>
       </section>
