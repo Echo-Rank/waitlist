@@ -1,20 +1,20 @@
-"use client";
+"use client"
 import EmailForm from "@/components/EmailForm";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import { FaXTwitter, FaInstagram } from "react-icons/fa6";
 
 export default function Home() {
-  
+
+  const [isMobile, setIsMobile] = useState(false);
+
   useEffect(() => {
-    // Trigger a toast notification on component mount with a unique id
-    toast("This is a test toast notification!", {
-      id: "unique-toast", // Unique ID for the toast
-      duration: 5000,
-    });
+    setIsMobile(window.innerWidth < 1024);
   }, []);
+
+
   return (
     <>
       <section className="w-screen min-h-dvh grid grid-cols-1 md:grid-cols-2 gap-6 bg-[#e9ecef] relative">
@@ -67,7 +67,7 @@ export default function Home() {
         </div>
       </section>
       <Toaster
-        position={window.innerWidth < 1024 ? "bottom-center" : "top-center"}
+        position={isMobile ? "bottom-center" : "top-center"}
       />
     </>
   );
