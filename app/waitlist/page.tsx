@@ -47,7 +47,7 @@ export default function Home() {
               height={75}
             />
             <h1 className="font-semibold tracking-tight text-zinc-900 text-3xl leading-tight md:text-4xl max-w-lg">
-              Rank, Rate, Relive.
+              Rank, Rate, Relisten.
             </h1>
           </div>
           <p className="text-zinc-700">
