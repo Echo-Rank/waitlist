@@ -23,7 +23,7 @@ export default function Home() {
             src="/waitlist.png"
             alt="Echo App Screenshots"
             fill
-            className="object-contain mt-8 md:mt-24 px-14 object-bottom"
+            className="object-contain mt-8 md:mt-0 sm:mt-0 px-14 object-bottom"
           />
         </div>
         <main className="flex flex-col gap-8 justify-center px-6 pb-10">
@@ -43,7 +43,7 @@ export default function Home() {
               style={{ marginLeft: "-20px" }}
               src="/Echo.png"
               alt="Echo Logo"
-              width={75}
+              width={ 75}
               height={75}
             />
             <h1 className="font-semibold tracking-tight text-zinc-900 text-3xl leading-tight md:text-4xl max-w-lg">
