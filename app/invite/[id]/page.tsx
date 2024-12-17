@@ -5,14 +5,14 @@
 import { useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 
-export default function InvitePage({ params }) {
+export default function InvitePage({ params }: { params: { id: string } }) {
   const { id } = params;
   const router = useRouter();
 
   useEffect(() => {
-    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
     const isAndroid = /android/i.test(userAgent);
-    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !window.MSStream;
+    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream;
 
     if (isIOS) {
       // Attempt to open the app using Universal Link
