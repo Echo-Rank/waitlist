@@ -61,13 +61,13 @@ export default function Home() {
           <EmailForm />
         </main>
         <div className="hidden md:flex justify-end space-x-4 absolute top-4 right-4">
-          <Link href="https://twitter.com/echorankapp" target="_blank">
+          <Link href="https://twitter.com/echodotapp" target="_blank">
             <FaXTwitter className="text-zinc-900 w-6 h-6" />
           </Link>
-          <Link href="https://instagram.com/echo.rank" target="_blank">
+          <Link href="https://instagram.com/echodotapp" target="_blank">
             <FaInstagram className="text-zinc-900 w-6 h-6" />
           </Link>
-          <Link href="https://tiktok.com/@echorankapp" target="_blank">
+          <Link href="https://tiktok.com/@echodotapp" target="_blank">
             <FaTiktok className="text-zinc-900 w-6 h-6" />
           </Link>
         </div>
