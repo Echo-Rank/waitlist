@@ -1,0 +1,11 @@
+{
+  "applinks": {
+    "apps": [],
+    "details": [
+      {
+        "appID": "DL4BRC3QYP.com.utkarshuppal.Echo",
+        "paths": [ "/invite/*" ]
+      }
+    ]
+  }
+}

@@ -28,13 +28,13 @@ export default function Home() {
         </div>
         <main className="flex flex-col gap-8 justify-center px-6 pb-10">
           <div className="md:hidden flex justify-end space-x-4 mt-4">
-          <Link href="https://tiktok.com/@echorankapp" target="_blank">
+          <Link href="https://tiktok.com/@echodotapp" target="_blank">
               <FaTiktok className="text-zinc-900 w-6 h-6" />
             </Link>
-            <Link href="https://twitter.com/echorankapp" target="_blank">
+            <Link href="https://twitter.com/echodotapp" target="_blank">
               <FaXTwitter className="text-zinc-900 w-6 h-6" />
             </Link>
-            <Link href="https://instagram.com/echo.rank" target="_blank">
+            <Link href="https://instagram.com/echodotapp" target="_blank">
               <FaInstagram className="text-zinc-900 w-6 h-6" />
             </Link>
           </div>
