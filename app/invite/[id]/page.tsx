@@ -10,36 +10,32 @@ export default function InvitePage({ params }: { params: { id: string } }) {
   const router = useRouter();
 
   useEffect(() => {
-    const userAgent = navigator.userAgent || navigator.vendor || (window as any).opera;
-    const isAndroid = /android/i.test(userAgent);
-    const isIOS = /iPad|iPhone|iPod/.test(userAgent) && !(window as any).MSStream;
+    // Check if device is iOS
+    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
 
     if (isIOS) {
-      // Attempt to open the app using Universal Link
-      window.location.href = `https://echorank.app/invite/${id}`;
-
-      // Fallback to App Store after a delay
-      setTimeout(() => {
-        window.location.href = 'https://apps.apple.com/app/your-app-id';
-      }, 2000);
-    } else if (isAndroid) {
-      // Attempt to open the app using App Link
-      window.location.href = `intent://echorank.app/invite/${id}#Intent;scheme=https;package=com.utkarshuppal.Echo;end`;
-
-      // Fallback to Play Store after a delay
-      setTimeout(() => {
-        window.location.href = 'https://play.google.com/store/apps/details?id=com.utkarshuppal.Echo';
-      }, 2000);
-    } else {
-      // For other platforms, redirect or show a message
-      router.push('/waitlist');
+      // Try to open the app with custom URL scheme
+      window.location.href = `echo://invite/${id}`;
     }
+
+    // Fallback to App Store after a delay for all devices
+    setTimeout(() => {
+      window.location.href = 'https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746';
+    }, 1000);
   }, [id, router]);
 
   return (
-    <div>
-      <h1>Loading...</h1>
-      <p>If nothing happens, <a href="https://apps.apple.com/app/your-app-id">click here</a> to download the app.</p>
+    <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center">
+      <h1 className="text-xl font-bold mb-4">Opening Echo...</h1>
+      <p>
+        If nothing happens,{' '}
+        <a 
+          href="https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746" 
+          className="text-blue-600 underline"
+        >
+          download Echo from the App Store
+        </a>
+      </p>
     </div>
   );
 }

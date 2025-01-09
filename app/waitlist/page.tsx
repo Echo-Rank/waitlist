@@ -59,6 +59,20 @@ export default function Home() {
             Join our waitlist to be notified when Echo launches.
           </p>
           <EmailForm />
+          
+          <Link 
+            href="https://apps.apple.com/app/echo-rank-rate-relisten/id6717572746" 
+            target="_blank"
+            className="w-fit hover:opacity-80 transition-opacity"
+          >
+            <Image
+              src="/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
+              alt="Download on the App Store"
+              width={120}
+              height={40}
+              priority
+            />
+          </Link>
         </main>
         <div className="hidden md:flex justify-end space-x-4 absolute top-4 right-4">
           <Link href="https://twitter.com/echodotapp" target="_blank">
