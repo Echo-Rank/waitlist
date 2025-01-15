@@ -21,7 +21,7 @@ export default function InvitePage({ params }: { params: { id: string } }) {
     // Fallback to App Store after a delay for all devices
     setTimeout(() => {
       window.location.href = 'https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746';
-    }, 1000);
+    }, 2000);
   }, [id, router]);
 
   return (
