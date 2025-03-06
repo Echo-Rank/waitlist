@@ -6,7 +6,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Echo",
-  description: "Rank. Rate. Relive.",
+  description: "Rank, Rate, Relisten.",
   icons: {
     icon: "/EchoLarge.png",
   },
