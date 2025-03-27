@@ -80,7 +80,7 @@ export default function Home() {
             />
           </div>
 
-          <div className="max-w-xl">
+          {/* <div className="max-w-xl">
             <Image
               src="/waitlist.png"
               alt="Echo App Screenshots"
@@ -88,7 +88,13 @@ export default function Home() {
               height={466}
               className="rounded-lg"
             />
-          </div>
+          </div> */}
+
+          <footer
+            className={`${inter.className} text-[#4a6464] dark:text-[#d0c2a7] text-sm mt-12 mb-6 opacity-80`}
+          >
+            © 2025 Echo Social. All rights reserved.
+          </footer>
         </main>
       </section>
       <Toaster position={isMobile ? "bottom-center" : "top-center"} />
