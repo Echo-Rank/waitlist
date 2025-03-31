@@ -1,7 +1,7 @@
-"use client"
-import Link from "next/link";
+"use client";
 import Image from "next/image";
-import { FaXTwitter, FaInstagram } from "react-icons/fa6";
+import Link from "next/link";
+import { FaInstagram, FaXTwitter } from "react-icons/fa6";
 
 export default function Support() {
   return (
@@ -22,15 +22,17 @@ export default function Support() {
 
         <div className="prose prose-zinc max-w-none">
           <div className="bg-white rounded-lg p-6 shadow-sm mb-8">
-            <h2 className="text-xl font-semibold text-zinc-900 mt-0 mb-4">Need Help?</h2>
+            <h2 className="text-xl font-semibold text-zinc-900 mt-0 mb-4">
+              Need Help?
+            </h2>
             <p className="text-zinc-700 mb-4">
-              We're here to help you with any questions or issues you might have with Echo. 
-              Here are the fastest ways to get support:
+              We're here to help you with any questions or issues you might have
+              with Echo. Here are the fastest ways to get support:
             </p>
-            
+
             <div className="flex flex-col gap-2">
-              <Link 
-                href="mailto:utkarsh@echorank.app" 
+              <Link
+                href="mailto:utkarsh@echorank.app"
                 className="text-zinc-900 hover:text-zinc-700 flex items-center gap-2"
               >
                 📧 utkarsh@echorank.app
@@ -42,48 +44,64 @@ export default function Support() {
           </div>
 
           <div className="bg-white rounded-lg p-6 shadow-sm mb-8">
-            <h2 className="text-xl font-semibold text-zinc-900 mt-0 mb-4">Common Questions</h2>
-            
+            <h2 className="text-xl font-semibold text-zinc-900 mt-0 mb-4">
+              Common Questions
+            </h2>
+
             <div className="space-y-6">
               <div>
-                <h3 className="font-medium text-zinc-900 mb-2">How do I connect my Spotify/Apple Music account?</h3>
+                <h3 className="font-medium text-zinc-900 mb-2">
+                  How do I connect my Spotify/Apple Music account?
+                </h3>
                 <p className="text-zinc-700">
-                  Go to Settings in the Echo app and tap on "Connect Music Services". Follow the prompts to connect your preferred music service.
+                  Go to Settings in the Echo app and tap on "Connect Music
+                  Services". Follow the prompts to connect your preferred music
+                  service.
                 </p>
               </div>
 
               <div>
-                <h3 className="font-medium text-zinc-900 mb-2">How do I create or edit my rankings?</h3>
+                <h3 className="font-medium text-zinc-900 mb-2">
+                  How do I create or edit my rankings?
+                </h3>
                 <p className="text-zinc-700">
-                  Press the plus button on the bottom of the screen. You can edit existing rankings by tapping the three dots menu on any ranking OR by re-ranking the album.
+                  Press the plus button on the bottom of the screen. You can
+                  edit existing rankings by tapping the three dots menu on any
+                  ranking OR by re-ranking the album.
                 </p>
               </div>
 
               <div>
-                <h3 className="font-medium text-zinc-900 mb-2">How do I reset my password?</h3>
+                <h3 className="font-medium text-zinc-900 mb-2">
+                  How do I reset my password?
+                </h3>
                 <p className="text-zinc-700">
-                  Use the "Forgot Password" option on the login screen. We'll send you an email with a code to reset your password.
+                  Use the "Forgot Password" option on the login screen. We'll
+                  send you an email with a code to reset your password.
                 </p>
               </div>
             </div>
           </div>
 
           <div className="bg-white rounded-lg p-6 shadow-sm mb-8">
-            <h2 className="text-xl font-semibold text-zinc-900 mt-0 mb-4">Follow Us</h2>
+            <h2 className="text-xl font-semibold text-zinc-900 mt-0 mb-4">
+              Follow Us
+            </h2>
             <p className="text-zinc-700 mb-4">
-              Follow us on social media for updates, tips, and community highlights:
+              Follow us on social media for updates, tips, and community
+              highlights:
             </p>
-            
+
             <div className="flex gap-4">
-              <Link 
-                href="https://twitter.com/echodotapp" 
+              <Link
+                href="https://twitter.com/echodotapp"
                 target="_blank"
                 className="text-zinc-900 hover:text-zinc-700 flex items-center gap-2"
               >
                 <FaXTwitter className="w-5 h-5" /> @echodotapp
               </Link>
-              <Link 
-                href="https://instagram.com/echodotapp" 
+              <Link
+                href="https://instagram.com/echodotapp"
                 target="_blank"
                 className="text-zinc-900 hover:text-zinc-700 flex items-center gap-2"
               >
@@ -93,9 +111,14 @@ export default function Support() {
           </div>
 
           <div className="bg-white rounded-lg p-6 shadow-sm">
-            <h2 className="text-xl font-semibold text-zinc-900 mt-0 mb-4">Legal</h2>
+            <h2 className="text-xl font-semibold text-zinc-900 mt-0 mb-4">
+              Legal
+            </h2>
             <div className="space-y-2">
-              <Link href="/privacy" className="text-zinc-900 hover:text-zinc-700 block">
+              <Link
+                href="/privacy"
+                className="text-zinc-900 hover:text-zinc-700 block"
+              >
                 Privacy Policy
               </Link>
               {/* <Link href="/terms" className="text-zinc-900 hover:text-zinc-700 block">
@@ -113,4 +136,4 @@ export default function Support() {
       </div>
     </section>
   );
-} 
+}

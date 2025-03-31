@@ -123,10 +123,10 @@ export default function Privacy() {
             If you have any questions about this Privacy Policy, please contact
             us at:{" "}
             <Link
-              href="mailto:privacy@echorank.app"
+              href="mailto:utkarsh@echorank.app"
               className="text-zinc-900 underline"
             >
-              privacy@echorank.app
+              utkarsh@echorank.app
             </Link>
           </p>
 

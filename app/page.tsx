@@ -93,7 +93,7 @@ export default function Home() {
           <footer
             className={`${inter.className} text-[#4a6464] dark:text-[#d0c2a7] text-sm mt-12 mb-6 opacity-80`}
           >
-            © 2025 Echo Social. All rights reserved.
+            © 2025 Echo Social, Inc. All rights reserved.
           </footer>
         </main>
       </section>
