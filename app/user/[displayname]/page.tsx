@@ -27,7 +27,7 @@ export default async function ProfilePage({ params }: Props) {
 
   // If profile not found, we'll still render the client component
   // that will handle the redirect to main site
-  const userId = data?.user_id || null;
+  const userId = data?.id || null;
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center">
