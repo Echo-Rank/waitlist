@@ -1,5 +1,10 @@
 import { createClient } from "@supabase/supabase-js";
 
+// Define types for better TypeScript support
+export type ProfileData = {
+  user_id: string;
+};
+
 // This creates a client for use in browser and server-side
 export const createSupabaseClient = () => {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
@@ -26,18 +31,20 @@ export const getSupabaseClient = () => {
 };
 
 // Helper function to get profile by display name
-export async function getProfileByDisplayName(displayname: string) {
+export async function getProfileByDisplayName(displayname: string): Promise<{
+  data: ProfileData | null;
+  error: any;
+}> {
   try {
     const supabase = getSupabaseClient();
 
     const { data, error } = await supabase
       .from("profiles")
-      .select("id")
+      .select("user_id")
       .eq("displayname", displayname)
       .single();
 
     if (error) throw error;
-    console.log(data);
 
     return { data, error: null };
   } catch (error) {
