@@ -15,7 +15,8 @@ export default function ClientRedirect({
     if (!userId) {
       // If no user ID found, redirect to main site after a short delay
       setTimeout(() => {
-        window.location.href = "https://echorank.app";
+        window.location.href =
+          "https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746";
       }, 2000);
       return;
     }
@@ -29,9 +30,10 @@ export default function ClientRedirect({
       window.location.href = `echo://user/${userId}`;
     }
 
-    // Redirect to the web profile after a short delay (for all devices)
+    // Redirect to the App Store after a short delay (for all devices)
     setTimeout(() => {
-      window.location.href = `https://echorank.app/user/${userId}`;
+      window.location.href =
+        "https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746";
     }, 2000);
   }, [userId, displayname]);
 

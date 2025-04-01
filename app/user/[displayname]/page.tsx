@@ -37,14 +37,10 @@ export default async function ProfilePage({ params }: Props) {
       <p>
         If nothing happens,{" "}
         <a
-          href={
-            userId
-              ? `https://echorank.app/user/${userId}`
-              : "https://echorank.app"
-          }
+          href="https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746"
           className="text-blue-600 underline"
         >
-          visit Echo on the web
+          download Echo from the App Store
         </a>
       </p>
     </div>
