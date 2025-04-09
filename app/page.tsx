@@ -94,6 +94,14 @@ export default function Home() {
             className={`${inter.className} text-[#4a6464] dark:text-[#d0c2a7] text-sm mt-12 mb-6 opacity-80`}
           >
             © 2025 Echo Social, Inc. All rights reserved.
+            <div className="mt-2">
+              <Link href="/privacy" className="hover:underline mr-4">
+                Privacy Policy
+              </Link>
+              <Link href="/support" className="hover:underline">
+                Support
+              </Link>
+            </div>
           </footer>
         </main>
       </section>
