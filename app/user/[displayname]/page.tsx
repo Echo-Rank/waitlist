@@ -20,17 +20,6 @@ export async function generateMetadata(
   const firstName = data?.firstname || "";
   const lastName = data?.lastname || "";
   const fullName = `${firstName} ${lastName}`.trim();
-  const userBio = data?.bio || "";
-  const location = data?.location || "";
-
-  // Description text will still contain profile details
-  const profileDisplay = [
-    fullName ? `${fullName} @${displayname}` : `@${displayname}`,
-    location,
-    userBio,
-  ]
-    .filter(Boolean)
-    .join("\n");
 
   // Preview text should say "Follow @displayname on Echo"
   const previewText = `Follow @${displayname} on Echo`;
@@ -39,37 +28,32 @@ export async function generateMetadata(
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://echorank.app";
   const echoIconUrl = `${siteUrl}/Echo.png`;
 
-  // The profile URL to use in metadata
-  const profileUrl = `${siteUrl}/user/${displayname}`;
-
   // URL for the dynamically generated profile card image
   const profileCardUrl = `${siteUrl}/api/profile-card/${displayname}`;
 
   return {
     title: previewText,
-    description: profileDisplay,
+    description: "echorank.app",
     openGraph: {
       title: previewText,
-      description: profileDisplay,
+      description: "echorank.app",
       images: [
         {
           url: profileCardUrl,
-          width: 1200,
-          height: 630,
-          alt: `${displayname}'s profile on Echo`,
+          width: 800,
+          height: 418,
+          alt: previewText,
         },
       ],
-      type: "profile",
-      url: profileUrl,
+      siteName: "Echo",
     },
     twitter: {
-      card: "summary_large_image", // Changed to large image for the card
+      card: "summary_large_image",
       title: previewText,
-      description: profileDisplay,
+      description: "echorank.app",
       images: [profileCardUrl],
     },
     other: {
-      "og:site_name": "Echo",
       "theme-color": "#000000",
     },
   };

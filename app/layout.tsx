@@ -8,7 +8,8 @@ export const metadata: Metadata = {
   title: "Echo",
   description: "Rank, Rate, Relisten.",
   icons: {
-    icon: "/EchoLarge.png",
+    icon: "/Echo.png",
+    apple: "/Echo.png",
   },
 };
 

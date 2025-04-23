@@ -25,71 +25,70 @@ export async function GET(
               justifyContent: "center",
               width: "100%",
               height: "100%",
-              backgroundColor: "#f7f7f7",
-              color: "#333",
+              backgroundColor: "#000000",
+              color: "#ffffff",
               fontFamily: "sans-serif",
-              padding: "40px",
+              padding: "20px",
             }}
           >
-            <div style={{ fontSize: "32px", fontWeight: "bold" }}>
-              Profile not found
+            <div
+              style={{
+                fontSize: "48px",
+                fontWeight: "bold",
+                marginBottom: "20px",
+              }}
+            >
+              Echo
             </div>
+            <div style={{ fontSize: "32px" }}>@{displayname}</div>
           </div>
         ),
         {
-          width: 1200,
-          height: 630,
+          width: 800,
+          height: 418,
         }
       );
     }
 
     // Extract profile data
-    const {
-      imagesrc,
-      firstname,
-      lastname,
-      displayname: username,
-      bio,
-      location,
-    } = data;
+    const { imagesrc, firstname, lastname, displayname: username } = data;
     const fullName = [firstname, lastname].filter(Boolean).join(" ");
-
     const profileImageSrc = imagesrc || "https://echorank.app/Echo.png"; // Fallback to Echo logo
 
-    // Create a profile card that resembles the Echo profile UI
+    // Create a simpler profile card optimized for iMessage
     return new ImageResponse(
       (
         <div
           style={{
             display: "flex",
-            flexDirection: "column",
             width: "100%",
             height: "100%",
-            padding: "40px",
-            color: "#000",
-            background: "white",
+            backgroundColor: "#000000",
+            color: "#ffffff",
             fontFamily: "sans-serif",
+            padding: "50px",
+            alignItems: "center",
           }}
         >
-          <div style={{ display: "flex", flexDirection: "row", gap: "20px" }}>
-            {/* Profile picture */}
+          {/* Left side - Profile picture */}
+          <div style={{ display: "flex", marginRight: "30px" }}>
             <div
               style={{
-                width: "160px",
-                height: "160px",
-                borderRadius: "9999px",
+                width: "200px",
+                height: "200px",
+                borderRadius: "100%",
                 overflow: "hidden",
                 display: "flex",
                 alignItems: "center",
                 justifyContent: "center",
-                flexShrink: 0,
+                backgroundColor: "#ffffff",
               }}
             >
               <img
                 src={profileImageSrc}
                 alt={`${username}'s profile`}
-                width={160}
-                height={160}
+                width={200}
+                height={200}
                 style={{
                   objectFit: "cover",
                   width: "100%",
@@ -97,143 +96,82 @@ export async function GET(
                 }}
               />
             </div>
-
-            {/* Profile info */}
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                gap: "8px",
-                maxWidth: "70%",
-              }}
-            >
-              {/* Name and verified badge */}
-              <div
-                style={{ display: "flex", alignItems: "center", gap: "8px" }}
-              >
-                <div style={{ fontSize: "36px", fontWeight: "bold" }}>
-                  {fullName}
-                </div>
-                {/* "Verified" badge - gold checkmark */}
-                <div
-                  style={{
-                    backgroundColor: "#FFD700",
-                    borderRadius: "9999px",
-                    width: "24px",
-                    height: "24px",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                  }}
-                >
-                  ✓
-                </div>
-              </div>
-
-              {/* Username */}
-              <div style={{ fontSize: "24px", color: "#6b7280" }}>
-                @{username}
-              </div>
-
-              {/* Location */}
-              {location && (
-                <div style={{ fontSize: "20px", color: "#6b7280" }}>
-                  {location}
-                </div>
-              )}
-
-              {/* Bio */}
-              {bio && (
-                <div style={{ fontSize: "20px", marginTop: "8px" }}>{bio}</div>
-              )}
-            </div>
           </div>
 
-          {/* Bottom section - stats panel and follow button */}
+          {/* Right side - Text */}
           <div
             style={{
               display: "flex",
-              marginTop: "40px",
-              justifyContent: "space-between",
-              alignItems: "center",
+              flexDirection: "column",
+              justifyContent: "center",
             }}
           >
-            {/* Stats */}
-            <div style={{ display: "flex", gap: "30px" }}>
+            {fullName && (
               <div
                 style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
+                  fontSize: "44px",
+                  fontWeight: "bold",
+                  marginBottom: "10px",
                 }}
               >
-                <div style={{ fontSize: "28px", fontWeight: "bold" }}>179</div>
-                <div style={{ fontSize: "18px", color: "#6b7280" }}>
-                  Rankings
-                </div>
+                {fullName}
               </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <div style={{ fontSize: "28px", fontWeight: "bold" }}>4067</div>
-                <div style={{ fontSize: "18px", color: "#6b7280" }}>
-                  Followers
-                </div>
-              </div>
-              <div
-                style={{
-                  display: "flex",
-                  flexDirection: "column",
-                  alignItems: "center",
-                }}
-              >
-                <div style={{ fontSize: "28px", fontWeight: "bold" }}>448</div>
-                <div style={{ fontSize: "18px", color: "#6b7280" }}>
-                  Following
-                </div>
-              </div>
-            </div>
-
-            {/* Follow button */}
+            )}
             <div
               style={{
-                backgroundColor: "#000",
-                color: "#fff",
-                padding: "14px 36px",
-                borderRadius: "9999px",
+                fontSize: "36px",
+                color: "#cccccc",
+                marginBottom: "20px",
+              }}
+            >
+              @{username}
+            </div>
+            <div
+              style={{
                 fontSize: "24px",
+                padding: "12px 30px",
+                backgroundColor: "#ffffff",
+                color: "#000000",
+                borderRadius: "100px",
                 fontWeight: "bold",
+                display: "inline-block",
+                textAlign: "center",
+                maxWidth: "200px",
               }}
             >
               Follow
             </div>
           </div>
 
-          {/* Echo branding */}
+          {/* Echo Logo in corner */}
           <div
             style={{
               position: "absolute",
               bottom: "20px",
               right: "20px",
-              display: "flex",
-              alignItems: "center",
-              gap: "8px",
+              opacity: 0.8,
             }}
           >
-            <div style={{ fontSize: "18px", color: "#6b7280" }}>
-              echorank.app
-            </div>
+            <svg width="60" height="60" viewBox="0 0 60 60" fill="none">
+              <path
+                d="M60 30C60 46.5685 46.5685 60 30 60C13.4315 60 0 46.5685 0 30C0 13.4315 13.4315 0 30 0C46.5685 0 60 13.4315 60 30Z"
+                fill="#ffffff"
+              />
+              <path
+                d="M18 36C18 43.732 24.268 50 32 50C39.732 50 46 43.732 46 36C46 28.268 39.732 22 32 22"
+                fill="#000000"
+              />
+              <path
+                d="M12 24C12 31.732 18.268 38 26 38C33.732 38 40 31.732 40 24C40 16.268 33.732 10 26 10"
+                fill="#000000"
+              />
+            </svg>
           </div>
         </div>
       ),
       {
-        width: 1200,
-        height: 630,
+        width: 800,
+        height: 418,
       }
     );
   } catch (e) {
