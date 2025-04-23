@@ -1,18 +1,28 @@
 /** @type {import('next').NextConfig} */
-const nextConfig = {}
+const nextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**',
+      },
+    ],
+  },
+}
 
 module.exports = {
-    async headers() {
-      return [
-        {
-          source: '/apple-app-site-association',
-          headers: [
-            {
-              key: 'Content-Type',
-              value: 'application/json',
-            },
-          ],
-        },
-      ];
-    },
-  };
+  ...nextConfig,
+  async headers() {
+    return [
+      {
+        source: '/apple-app-site-association',
+        headers: [
+          {
+            key: 'Content-Type',
+            value: 'application/json',
+          },
+        ],
+      },
+    ];
+  },
+};
