@@ -15,15 +15,15 @@ export async function generateMetadata(
 
   // Get profile data to use profile picture in metadata
   const { data } = await getProfileByDisplayName(displayname);
-  const profileImageSrc = data?.imagesrc;
+
+  // Build description for text-only previews
   const firstName = data?.firstname || "";
   const lastName = data?.lastname || "";
   const fullName = `${firstName} ${lastName}`.trim();
   const userBio = data?.bio || "";
   const location = data?.location || "";
 
-  // Build the profile display in the format of the image
-  // Format: Name @displayname \n Location \n Bio
+  // Description text will still contain profile details
   const profileDisplay = [
     fullName ? `${fullName} @${displayname}` : `@${displayname}`,
     location,
@@ -35,12 +35,15 @@ export async function generateMetadata(
   // Preview text should say "Follow @displayname on Echo"
   const previewText = `Follow @${displayname} on Echo`;
 
-  // Absolute URL for the Echo icon
+  // Absolute URL for the Echo icon and site
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://echorank.app";
   const echoIconUrl = `${siteUrl}/Echo.png`;
 
   // The profile URL to use in metadata
   const profileUrl = `${siteUrl}/user/${displayname}`;
+
+  // URL for the dynamically generated profile card image
+  const profileCardUrl = `${siteUrl}/api/profile-card/${displayname}`;
 
   return {
     title: previewText,
@@ -49,25 +52,21 @@ export async function generateMetadata(
       title: previewText,
       description: profileDisplay,
       images: [
-        ...(profileImageSrc
-          ? [
-              {
-                url: profileImageSrc,
-                width: 800,
-                height: 800,
-                alt: `${displayname}'s profile picture`,
-              },
-            ]
-          : []),
+        {
+          url: profileCardUrl,
+          width: 1200,
+          height: 630,
+          alt: `${displayname}'s profile on Echo`,
+        },
       ],
       type: "profile",
       url: profileUrl,
     },
     twitter: {
-      card: "summary",
+      card: "summary_large_image", // Changed to large image for the card
       title: previewText,
       description: profileDisplay,
-      images: profileImageSrc ? [profileImageSrc] : [echoIconUrl],
+      images: [profileCardUrl],
     },
     other: {
       "og:site_name": "Echo",
