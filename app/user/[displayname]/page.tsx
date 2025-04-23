@@ -15,46 +15,38 @@ export async function generateMetadata(
 
   // Get profile data to use profile picture in metadata
   const { data } = await getProfileByDisplayName(displayname);
+  const profileImageSrc = data?.imagesrc;
 
-  // Absolute URL for the custom OG image API
+  // Absolute URL for the Echo icon
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://echorank.app";
-  const ogImageUrl = `${siteUrl}/api/og/profile/${encodeURIComponent(
-    displayname
-  )}`;
-
-  // Website URL to display in preview
-  const websiteUrl = "echomusicapp.com";
+  const echoIconUrl = `${siteUrl}/Echo.png`;
 
   return {
-    title: data?.displayname
-      ? `${data.displayname} on Echo`
-      : `${displayname} | Echo Profile`,
-    description:
-      data?.follower_count !== undefined
-        ? `${data.follower_count} followers · ${data.following_count} following`
-        : `View ${displayname}'s profile on Echo`,
+    title: `${displayname} | Echo Profile`,
+    description: `View ${displayname}'s profile on Echo`,
     openGraph: {
-      title: data?.displayname
-        ? `@${data.displayname} on echo`
-        : `${displayname} on Echo`,
-      description: websiteUrl,
+      title: `${displayname} on Echo`,
+      description: `Check out ${displayname}'s music profile on Echo`,
       images: [
-        {
-          url: ogImageUrl,
-          width: 1200,
-          height: 630,
-          alt: `${displayname}'s profile on Echo`,
-        },
+        ...(profileImageSrc
+          ? [
+              {
+                url: profileImageSrc,
+                width: 1200,
+                height: 630,
+                alt: `${displayname}'s profile picture`,
+              },
+            ]
+          : []),
+        { url: echoIconUrl, width: 1200, height: 630, alt: "Echo app icon" },
       ],
       type: "profile",
     },
     twitter: {
       card: "summary_large_image",
-      title: data?.displayname
-        ? `@${data.displayname} on echo`
-        : `${displayname} on Echo`,
-      description: websiteUrl,
-      images: [ogImageUrl],
+      title: `${displayname} on Echo`,
+      description: `Check out ${displayname}'s music profile on Echo`,
+      images: profileImageSrc ? [profileImageSrc] : [echoIconUrl],
     },
   };
 }

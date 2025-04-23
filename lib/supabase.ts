@@ -4,10 +4,6 @@ import { createClient } from "@supabase/supabase-js";
 export type ProfileData = {
   id: string;
   imagesrc?: string;
-  displayname: string;
-  follower_count?: number;
-  following_count?: number;
-  verified?: boolean;
 };
 
 // This creates a client for use in browser and server-side
@@ -43,43 +39,15 @@ export async function getProfileByDisplayName(displayname: string): Promise<{
   try {
     const supabase = getSupabaseClient();
 
-    // First get the basic profile data
-    const { data: profileData, error: profileError } = await supabase
+    const { data, error } = await supabase
       .from("profiles")
-      .select("id, imagesrc, displayname, verified")
+      .select("id, imagesrc")
       .eq("displayname", displayname)
       .single();
 
-    if (profileError) throw profileError;
+    if (error) throw error;
 
-    if (!profileData) {
-      return { data: null, error: null };
-    }
-
-    // Get follower count
-    const { count: followerCount, error: followerError } = await supabase
-      .from("user_followers")
-      .select("*", { count: "exact", head: true })
-      .eq("following_id", profileData.id);
-
-    if (followerError) throw followerError;
-
-    // Get following count
-    const { count: followingCount, error: followingError } = await supabase
-      .from("user_followers")
-      .select("*", { count: "exact", head: true })
-      .eq("follower_id", profileData.id);
-
-    if (followingError) throw followingError;
-
-    return {
-      data: {
-        ...profileData,
-        follower_count: followerCount || 0,
-        following_count: followingCount || 0,
-      },
-      error: null,
-    };
+    return { data, error: null };
   } catch (error) {
     console.error("Error fetching profile by displayname:", error);
     return { data: null, error };
