@@ -16,37 +16,62 @@ export async function generateMetadata(
   // Get profile data to use profile picture in metadata
   const { data } = await getProfileByDisplayName(displayname);
   const profileImageSrc = data?.imagesrc;
+  const firstName = data?.firstname || "";
+  const lastName = data?.lastname || "";
+  const fullName = `${firstName} ${lastName}`.trim();
+  const userBio = data?.bio || "";
+  const location = data?.location || "";
+
+  // Build the profile display in the format of the image
+  // Format: Name @displayname \n Location \n Bio
+  const profileDisplay = [
+    fullName ? `${fullName} @${displayname}` : `@${displayname}`,
+    location,
+    userBio,
+  ]
+    .filter(Boolean)
+    .join("\n");
+
+  // Preview text should say "Follow @displayname on Echo"
+  const previewText = `Follow @${displayname} on Echo`;
 
   // Absolute URL for the Echo icon
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://echorank.app";
   const echoIconUrl = `${siteUrl}/Echo.png`;
 
+  // The profile URL to use in metadata
+  const profileUrl = `${siteUrl}/user/${displayname}`;
+
   return {
-    title: `${displayname} | Echo Profile`,
-    description: `View ${displayname}'s profile on Echo`,
+    title: previewText,
+    description: profileDisplay,
     openGraph: {
-      title: `${displayname} on Echo`,
-      description: `Check out ${displayname}'s music profile on Echo`,
+      title: previewText,
+      description: profileDisplay,
       images: [
         ...(profileImageSrc
           ? [
               {
                 url: profileImageSrc,
-                width: 1200,
-                height: 630,
+                width: 800,
+                height: 800,
                 alt: `${displayname}'s profile picture`,
               },
             ]
           : []),
-        { url: echoIconUrl, width: 1200, height: 630, alt: "Echo app icon" },
       ],
       type: "profile",
+      url: profileUrl,
     },
     twitter: {
-      card: "summary_large_image",
-      title: `${displayname} on Echo`,
-      description: `Check out ${displayname}'s music profile on Echo`,
+      card: "summary",
+      title: previewText,
+      description: profileDisplay,
       images: profileImageSrc ? [profileImageSrc] : [echoIconUrl],
+    },
+    other: {
+      "og:site_name": "Echo",
+      "theme-color": "#000000",
     },
   };
 }

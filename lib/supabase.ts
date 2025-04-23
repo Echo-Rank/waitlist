@@ -4,6 +4,11 @@ import { createClient } from "@supabase/supabase-js";
 export type ProfileData = {
   id: string;
   imagesrc?: string;
+  firstname?: string;
+  lastname?: string;
+  displayname: string;
+  bio?: string;
+  location?: string;
 };
 
 // This creates a client for use in browser and server-side
@@ -41,7 +46,7 @@ export async function getProfileByDisplayName(displayname: string): Promise<{
 
     const { data, error } = await supabase
       .from("profiles")
-      .select("id, imagesrc")
+      .select("id, imagesrc, firstname, lastname, displayname, bio, location")
       .eq("displayname", displayname)
       .single();
 
