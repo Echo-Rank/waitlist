@@ -3,6 +3,7 @@ import { createClient } from "@supabase/supabase-js";
 // Define types for better TypeScript support
 export type ProfileData = {
   id: string;
+  imagesrc?: string;
 };
 
 // This creates a client for use in browser and server-side
@@ -40,7 +41,7 @@ export async function getProfileByDisplayName(displayname: string): Promise<{
 
     const { data, error } = await supabase
       .from("profiles")
-      .select("id")
+      .select("id, imagesrc")
       .eq("displayname", displayname)
       .single();
 
