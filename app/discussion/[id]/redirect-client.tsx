@@ -3,26 +3,13 @@
 import { useEffect } from "react";
 
 interface ClientRedirectProps {
-  userId: string | null;
-  displayname: string;
+  discussionId: string;
 }
 
-export default function ClientRedirect({
-  userId,
-  displayname,
-}: ClientRedirectProps) {
+export default function ClientRedirect({ discussionId }: ClientRedirectProps) {
   useEffect(() => {
-    if (!userId) {
-      // If no user ID found, redirect to App Store after a short delay
-      setTimeout(() => {
-        window.location.href =
-          "https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746";
-      }, 2000);
-      return;
-    }
-
-    // Attempt to open the Echo app on both iOS and Android
-    window.location.href = `echo://user/${userId}`;
+    // Attempt to open the Echo app using the custom URL scheme
+    window.location.href = `echo://discussion/${discussionId}`;
 
     // Determine device type to choose correct store link
     const isIOS =
@@ -35,12 +22,11 @@ export default function ClientRedirect({
         // ? "https://play.google.com/store/apps/details?id=app.echo"
         "https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746";
 
-    // Redirect to the appropriate store after a short delay
+    // Fallback to the appropriate store after a short delay
     setTimeout(() => {
       window.location.href = storeUrl;
     }, 2000);
-  }, [userId, displayname]);
+  }, [discussionId]);
 
-  // This component doesn't render anything visible
   return null;
 }
