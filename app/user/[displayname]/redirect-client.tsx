@@ -27,13 +27,13 @@ export default function ClientRedirect({
     // Determine device type to choose correct store link
     const isIOS =
       /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
-    const isAndroid = /Android/.test(navigator.userAgent);
+    // const isAndroid = /Android/.test(navigator.userAgent);
 
     const storeUrl = isIOS
       ? "https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746"
-      : isAndroid
-      ? "https://play.google.com/store/apps/details?id=app.echo"
-      : "https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746";
+      : // : isAndroid
+        // ? "https://play.google.com/store/apps/details?id=app.echo"
+        "https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746";
 
     // Redirect to the appropriate store after a short delay
     setTimeout(() => {
