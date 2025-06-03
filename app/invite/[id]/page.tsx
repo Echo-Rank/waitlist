@@ -10,19 +10,23 @@ export default function InvitePage({ params }: { params: { id: string } }) {
   const router = useRouter();
 
   useEffect(() => {
-    // Check if device is iOS
+    // Attempt to open the Echo app on both iOS and Android
+    window.location.href = `echo://invite/${id}`;
+
+    // Determine device type to select appropriate store link
     const isIOS =
       /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
+    const isAndroid = /Android/.test(navigator.userAgent);
 
-    if (isIOS) {
-      // Try to open the app with custom URL scheme
-      window.location.href = `echo://invite/${id}`;
-    }
+    const storeUrl = isIOS
+      ? "https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746"
+      : isAndroid
+      ? "https://play.google.com/store/apps/details?id=app.echo"
+      : "https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746";
 
-    // Fallback to App Store after a delay for all devices
+    // Fallback to the appropriate store after a delay
     setTimeout(() => {
-      window.location.href =
-        "https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746";
+      window.location.href = storeUrl;
     }, 2000);
   }, [id, router]);
 
