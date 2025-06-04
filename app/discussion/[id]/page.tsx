@@ -1,36 +1,91 @@
-import { Metadata } from "next";
+import { getDiscussionById } from "@/lib/supabase";
+import { Metadata, ResolvingMetadata } from "next";
 import ClientRedirect from "./redirect-client";
 
 interface Props {
   params: { id: string };
 }
 
-export const metadata: Metadata = {
-  title: "Echo Discussion",
-  description: "echorank.app",
-  openGraph: {
-    title: "Echo Discussion",
-    description: "echorank.app",
-    images: [
-      {
-        url: "https://echorank.app/Echo.png",
-        width: 800,
-        height: 418,
-        alt: "Echo Discussion",
+// Generate metadata for SEO and link previews
+export async function generateMetadata(
+  { params }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  const { id } = params;
+
+  // Get discussion data to use in metadata
+  const { data } = await getDiscussionById(id);
+
+  // Build metadata based on discussion data
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://echorank.app";
+  const discussionCardUrl = `${siteUrl}/api/discussion-card/${id}`;
+
+  if (data) {
+    const { title, content, user } = data;
+    const discussionTitle = title || "Untitled Discussion";
+    const userName = user?.displayname || "Unknown User";
+
+    // Create preview text
+    const previewTitle = `${userName} started a discussion: ${discussionTitle}`;
+    const previewDescription =
+      content.length > 100 ? content.substring(0, 100) + "..." : content;
+
+    return {
+      title: previewTitle,
+      description: previewDescription,
+      openGraph: {
+        title: previewTitle,
+        description: previewDescription,
+        images: [
+          {
+            url: discussionCardUrl,
+            width: 800,
+            height: 418,
+            alt: previewTitle,
+          },
+        ],
+        siteName: "Echo",
       },
-    ],
-    siteName: "Echo",
-  },
-  twitter: {
-    card: "summary_large_image",
+      twitter: {
+        card: "summary_large_image",
+        title: previewTitle,
+        description: previewDescription,
+        images: [discussionCardUrl],
+      },
+      other: {
+        "theme-color": "#000000",
+      },
+    };
+  }
+
+  // Fallback metadata if discussion not found
+  return {
     title: "Echo Discussion",
-    description: "echorank.app",
-    images: ["https://echorank.app/Echo.png"],
-  },
-  other: {
-    "theme-color": "#000000",
-  },
-};
+    description: "Join the conversation on Echo",
+    openGraph: {
+      title: "Echo Discussion",
+      description: "Join the conversation on Echo",
+      images: [
+        {
+          url: discussionCardUrl,
+          width: 800,
+          height: 418,
+          alt: "Echo Discussion",
+        },
+      ],
+      siteName: "Echo",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "Echo Discussion",
+      description: "Join the conversation on Echo",
+      images: [discussionCardUrl],
+    },
+    other: {
+      "theme-color": "#000000",
+    },
+  };
+}
 
 export default function DiscussionPage({ params }: Props) {
   const { id } = params;
@@ -39,7 +94,7 @@ export default function DiscussionPage({ params }: Props) {
       <ClientRedirect discussionId={id} />
       <h1 className="text-xl font-bold mb-4">Opening Echo...</h1>
       <p>
-        If nothing happens,{' '}
+        If nothing happens,{" "}
         <a
           href="https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746"
           className="text-blue-600 underline"

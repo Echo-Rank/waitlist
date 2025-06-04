@@ -11,6 +11,22 @@ export type ProfileData = {
   location?: string;
 };
 
+export type DiscussionData = {
+  id: number;
+  title?: string;
+  content: string;
+  created_at: string;
+  user_id: number;
+  tagged_albums?: number[];
+  user?: {
+    id: number;
+    displayname: string;
+    firstname?: string;
+    lastname?: string;
+    imagesrc?: string;
+  };
+};
+
 // This creates a client for use in browser and server-side
 export const createSupabaseClient = () => {
   const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
@@ -55,6 +71,51 @@ export async function getProfileByDisplayName(displayname: string): Promise<{
     return { data, error: null };
   } catch (error) {
     console.error("Error fetching profile by displayname:", error);
+    return { data: null, error };
+  }
+}
+
+// Helper function to get discussion by ID
+export async function getDiscussionById(id: string): Promise<{
+  data: DiscussionData | null;
+  error: any;
+}> {
+  try {
+    const supabase = getSupabaseClient();
+
+    const { data, error } = await supabase
+      .from("discussions")
+      .select(
+        `
+        id,
+        title,
+        content,
+        created_at,
+        user_id,
+        tagged_albums,
+        user:profiles!discussions_user_id_fkey (
+          id,
+          displayname,
+          firstname,
+          lastname,
+          imagesrc
+        )
+      `
+      )
+      .eq("id", id)
+      .single();
+
+    if (error) throw error;
+
+    // Transform the data to match our type
+    const transformedData: DiscussionData = {
+      ...data,
+      user: Array.isArray(data.user) ? data.user[0] : data.user,
+    };
+
+    return { data: transformedData, error: null };
+  } catch (error) {
+    console.error("Error fetching discussion by ID:", error);
     return { data: null, error };
   }
 }
