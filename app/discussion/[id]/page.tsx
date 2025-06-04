@@ -20,6 +20,7 @@ export async function generateMetadata(
     // Build metadata based on discussion data
     const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://echorank.app";
     const discussionCardUrl = `${siteUrl}/api/discussion-card/${id}`;
+    const pageUrl = `${siteUrl}/discussion/${id}`;
 
     if (data && !error) {
       const { title, content, user } = data;
@@ -36,15 +37,19 @@ export async function generateMetadata(
       return {
         title: previewTitle,
         description: previewDescription,
+        metadataBase: new URL(siteUrl),
         openGraph: {
           title: previewTitle,
           description: previewDescription,
+          url: pageUrl,
+          type: "website",
           images: [
             {
               url: discussionCardUrl,
               width: 800,
               height: 418,
               alt: previewTitle,
+              type: "image/png",
             },
           ],
           siteName: "Echo",
@@ -54,6 +59,7 @@ export async function generateMetadata(
           title: previewTitle,
           description: previewDescription,
           images: [discussionCardUrl],
+          site: "@echodotapp",
         },
         other: {
           "theme-color": "#000000",
@@ -67,19 +73,24 @@ export async function generateMetadata(
   // Fallback metadata if discussion not found or error occurred
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://echorank.app";
   const discussionCardUrl = `${siteUrl}/api/discussion-card/${id}`;
+  const pageUrl = `${siteUrl}/discussion/${id}`;
 
   return {
     title: "Echo Discussion",
     description: "Join the conversation on Echo",
+    metadataBase: new URL(siteUrl),
     openGraph: {
       title: "Echo Discussion",
       description: "Join the conversation on Echo",
+      url: pageUrl,
+      type: "website",
       images: [
         {
           url: discussionCardUrl,
           width: 800,
           height: 418,
           alt: "Echo Discussion",
+          type: "image/png",
         },
       ],
       siteName: "Echo",
@@ -89,6 +100,7 @@ export async function generateMetadata(
       title: "Echo Discussion",
       description: "Join the conversation on Echo",
       images: [discussionCardUrl],
+      site: "@echorank",
     },
     other: {
       "theme-color": "#000000",
