@@ -1,4 +1,4 @@
-import { getDiscussionById } from "@/lib/supabase";
+import { getDiscussionByFeedItemId } from "@/lib/supabase";
 import { Metadata, ResolvingMetadata } from "next";
 import ClientRedirect from "./redirect-client";
 
@@ -13,52 +13,61 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { id } = params;
 
-  // Get discussion data to use in metadata
-  const { data } = await getDiscussionById(id);
+  try {
+    // Get discussion data by feed item ID
+    const { data, error } = await getDiscussionByFeedItemId(id);
 
-  // Build metadata based on discussion data
+    // Build metadata based on discussion data
+    const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://echorank.app";
+    const discussionCardUrl = `${siteUrl}/api/discussion-card/${id}`;
+
+    if (data && !error) {
+      const { title, content, user } = data;
+      const discussionTitle = title || "Untitled Discussion";
+      const userName = user?.displayname || "Unknown User";
+
+      // Create preview text
+      const previewTitle = `${userName} started a discussion: ${discussionTitle}`;
+      const previewDescription =
+        content && content.length > 100
+          ? content.substring(0, 100) + "..."
+          : content || "Join the conversation on Echo";
+
+      return {
+        title: previewTitle,
+        description: previewDescription,
+        openGraph: {
+          title: previewTitle,
+          description: previewDescription,
+          images: [
+            {
+              url: discussionCardUrl,
+              width: 800,
+              height: 418,
+              alt: previewTitle,
+            },
+          ],
+          siteName: "Echo",
+        },
+        twitter: {
+          card: "summary_large_image",
+          title: previewTitle,
+          description: previewDescription,
+          images: [discussionCardUrl],
+        },
+        other: {
+          "theme-color": "#000000",
+        },
+      };
+    }
+  } catch (error) {
+    console.error("Error generating discussion metadata:", error);
+  }
+
+  // Fallback metadata if discussion not found or error occurred
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://echorank.app";
   const discussionCardUrl = `${siteUrl}/api/discussion-card/${id}`;
 
-  if (data) {
-    const { title, content, user } = data;
-    const discussionTitle = title || "Untitled Discussion";
-    const userName = user?.displayname || "Unknown User";
-
-    // Create preview text
-    const previewTitle = `${userName} started a discussion: ${discussionTitle}`;
-    const previewDescription =
-      content.length > 100 ? content.substring(0, 100) + "..." : content;
-
-    return {
-      title: previewTitle,
-      description: previewDescription,
-      openGraph: {
-        title: previewTitle,
-        description: previewDescription,
-        images: [
-          {
-            url: discussionCardUrl,
-            width: 800,
-            height: 418,
-            alt: previewTitle,
-          },
-        ],
-        siteName: "Echo",
-      },
-      twitter: {
-        card: "summary_large_image",
-        title: previewTitle,
-        description: previewDescription,
-        images: [discussionCardUrl],
-      },
-      other: {
-        "theme-color": "#000000",
-      },
-    };
-  }
-
-  // Fallback metadata if discussion not found
   return {
     title: "Echo Discussion",
     description: "Join the conversation on Echo",

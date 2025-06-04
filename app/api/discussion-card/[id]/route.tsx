@@ -1,4 +1,4 @@
-import { getDiscussionById } from "@/lib/supabase";
+import { getDiscussionByFeedItemId } from "@/lib/supabase";
 import { ImageResponse } from "next/og";
 import { NextRequest } from "next/server";
 
@@ -11,10 +11,11 @@ export async function GET(
   try {
     const { id } = params;
 
-    // Get discussion data from Supabase
-    const { data, error } = await getDiscussionById(id);
+    // Get discussion data by feed item ID
+    const { data, error } = await getDiscussionByFeedItemId(id);
 
     if (error || !data) {
+      console.log(`Discussion feed item ${id} not found:`, error);
       return new ImageResponse(
         (
           <div
@@ -28,19 +29,58 @@ export async function GET(
               backgroundColor: "#000000",
               color: "#ffffff",
               fontFamily: "sans-serif",
-              padding: "20px",
+              padding: "40px",
             }}
           >
             <div
               style={{
-                fontSize: "48px",
-                fontWeight: "bold",
-                marginBottom: "20px",
+                display: "flex",
+                alignItems: "center",
+                marginBottom: "30px",
               }}
             >
-              Echo
+              <div
+                style={{
+                  display: "flex",
+                  width: "60px",
+                  height: "60px",
+                  backgroundColor: "#ffffff",
+                  borderRadius: "8px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginRight: "15px",
+                }}
+              >
+                <img
+                  src="https://echorank.app/Echo.png"
+                  alt="Echo Logo"
+                  width={50}
+                  height={50}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  display: "flex",
+                  fontSize: "36px",
+                  fontWeight: "bold",
+                }}
+              >
+                Echo
+              </div>
             </div>
-            <div style={{ fontSize: "32px" }}>Discussion not found</div>
+            <div
+              style={{
+                display: "flex",
+                fontSize: "28px",
+                textAlign: "center",
+                color: "#cccccc",
+              }}
+            >
+              Join the conversation on Echo
+            </div>
           </div>
         ),
         {
@@ -58,7 +98,9 @@ export async function GET(
 
     // Truncate content for preview
     const truncatedContent =
-      content.length > 150 ? content.substring(0, 150) + "..." : content;
+      content && content.length > 150
+        ? content.substring(0, 150) + "..."
+        : content || "Join the conversation...";
 
     return new ImageResponse(
       (
@@ -84,6 +126,7 @@ export async function GET(
           >
             <div
               style={{
+                display: "flex",
                 width: "60px",
                 height: "60px",
                 borderRadius: "50%",
@@ -105,10 +148,18 @@ export async function GET(
               />
             </div>
             <div style={{ display: "flex", flexDirection: "column" }}>
-              <div style={{ fontSize: "24px", fontWeight: "bold" }}>
+              <div
+                style={{
+                  display: "flex",
+                  fontSize: "24px",
+                  fontWeight: "bold",
+                }}
+              >
                 @{displayName}
               </div>
-              <div style={{ fontSize: "18px", color: "#cccccc" }}>
+              <div
+                style={{ display: "flex", fontSize: "18px", color: "#cccccc" }}
+              >
                 started a discussion
               </div>
             </div>
@@ -118,6 +169,7 @@ export async function GET(
           <div style={{ display: "flex", flexDirection: "column", flex: 1 }}>
             <div
               style={{
+                display: "flex",
                 fontSize: "32px",
                 fontWeight: "bold",
                 marginBottom: "20px",
@@ -128,6 +180,7 @@ export async function GET(
             </div>
             <div
               style={{
+                display: "flex",
                 fontSize: "20px",
                 color: "#cccccc",
                 lineHeight: "1.4",
@@ -149,6 +202,7 @@ export async function GET(
           >
             <div
               style={{
+                display: "flex",
                 fontSize: "18px",
                 color: "#888888",
               }}
@@ -156,25 +210,33 @@ export async function GET(
               Join the conversation on Echo
             </div>
             <div style={{ display: "flex", alignItems: "center" }}>
-              <svg width="40" height="40" viewBox="0 0 60 60" fill="none">
-                <path
-                  d="M60 30C60 46.5685 46.5685 60 30 60C13.4315 60 0 46.5685 0 30C0 13.4315 13.4315 0 30 0C46.5685 0 60 13.4315 60 30Z"
-                  fill="#ffffff"
-                />
-                <path
-                  d="M18 36C18 43.732 24.268 50 32 50C39.732 50 46 43.732 46 36C46 28.268 39.732 22 32 22"
-                  fill="#000000"
-                />
-                <path
-                  d="M12 24C12 31.732 18.268 38 26 38C33.732 38 40 31.732 40 24C40 16.268 33.732 10 26 10"
-                  fill="#000000"
-                />
-              </svg>
               <div
                 style={{
+                  display: "flex",
+                  width: "40px",
+                  height: "40px",
+                  backgroundColor: "#ffffff",
+                  borderRadius: "6px",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  marginRight: "10px",
+                }}
+              >
+                <img
+                  src="https://echorank.app/Echo.png"
+                  alt="Echo Logo"
+                  width={40}
+                  height={40}
+                  style={{
+                    objectFit: "contain",
+                  }}
+                />
+              </div>
+              <div
+                style={{
+                  display: "flex",
                   fontSize: "24px",
-                  fontWeight: "bold",
-                  marginLeft: "10px",
+                  fontWeight: "800",
                 }}
               >
                 Echo

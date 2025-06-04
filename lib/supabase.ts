@@ -75,7 +75,66 @@ export async function getProfileByDisplayName(displayname: string): Promise<{
   }
 }
 
-// Helper function to get discussion by ID
+// Helper function to get discussion by feed item ID
+export async function getDiscussionByFeedItemId(feedItemId: string): Promise<{
+  data: DiscussionData | null;
+  error: any;
+}> {
+  try {
+    const supabase = getSupabaseClient();
+
+    const { data, error } = await supabase
+      .from("feed_items")
+      .select(
+        `
+        discussion_id,
+        discussions!inner (
+          id,
+          title,
+          content,
+          created_at,
+          user_id,
+          tagged_albums,
+          profiles (
+            id,
+            displayname,
+            firstname,
+            lastname,
+            imagesrc
+          )
+        )
+      `
+      )
+      .eq("id", feedItemId)
+      .eq("type", "discussion")
+      .single();
+
+    if (error) throw error;
+
+    // Transform the data to match our type
+    const discussion = Array.isArray(data.discussions)
+      ? data.discussions[0]
+      : data.discussions;
+    const transformedData: DiscussionData = {
+      id: discussion.id,
+      title: discussion.title,
+      content: discussion.content,
+      created_at: discussion.created_at,
+      user_id: discussion.user_id,
+      tagged_albums: discussion.tagged_albums,
+      user: Array.isArray(discussion.profiles)
+        ? discussion.profiles[0]
+        : discussion.profiles,
+    };
+
+    return { data: transformedData, error: null };
+  } catch (error) {
+    console.error("Error fetching discussion by feed item ID:", error);
+    return { data: null, error };
+  }
+}
+
+// Helper function to get discussion by ID (keeping for backward compatibility)
 export async function getDiscussionById(id: string): Promise<{
   data: DiscussionData | null;
   error: any;
@@ -93,7 +152,7 @@ export async function getDiscussionById(id: string): Promise<{
         created_at,
         user_id,
         tagged_albums,
-        user:profiles!discussions_user_id_fkey (
+        profiles (
           id,
           displayname,
           firstname,
@@ -109,8 +168,13 @@ export async function getDiscussionById(id: string): Promise<{
 
     // Transform the data to match our type
     const transformedData: DiscussionData = {
-      ...data,
-      user: Array.isArray(data.user) ? data.user[0] : data.user,
+      id: data.id,
+      title: data.title,
+      content: data.content,
+      created_at: data.created_at,
+      user_id: data.user_id,
+      tagged_albums: data.tagged_albums,
+      user: Array.isArray(data.profiles) ? data.profiles[0] : data.profiles,
     };
 
     return { data: transformedData, error: null };
