@@ -1,23 +1,14 @@
 "use client";
-import { DM_Serif_Display, Inter, Playfair_Display } from "next/font/google";
+import { Inter } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
-
-const dmSerifDisplay = DM_Serif_Display({
-  weight: "400",
-  subsets: ["latin"],
-});
-
-const playfairDisplay = Playfair_Display({
-  weight: "600",
-  subsets: ["latin"],
-});
+import { FaAndroid, FaApple } from "react-icons/fa";
 
 const inter = Inter({
   subsets: ["latin"],
-  weight: ["300", "400"],
+  weight: ["300", "400", "500", "600"],
 });
 
 export default function Home() {
@@ -29,82 +20,103 @@ export default function Home() {
 
   return (
     <>
-      <section className="w-screen min-h-dvh flex flex-col items-center justify-start bg-[#f5e8d3] dark:bg-[#2d4c4c] pt-28 md:pt-36">
-        <main className="flex flex-col items-center gap-4 px-6 text-center">
+      <section
+        className="w-screen min-h-screen flex flex-col items-center justify-center bg-[#121212]"
+        style={{ backgroundColor: "#121212" }}
+      >
+        <main className="flex flex-col items-center gap-8 px-6 text-center">
+          {/* Logo */}
           <div className="flex items-center">
-            <div className="relative dark:invert">
-              <Image src="/Echo.png" alt="Echo Logo" width={100} height={100} />
-            </div>
-            {/* <div className="relative">
+            <div className="relative">
               <Image
-                src="/echofont.png"
-                alt="Echo"
-                width={100}
-                height={33}
-                className="brightness-0 dark:brightness-100 dark:invert"
+                src="/Echo.png"
+                alt="Echo Logo"
+                width={120}
+                height={120}
+                className="brightness-0 invert"
+                style={{ filter: "brightness(0) invert(1)" }}
               />
-            </div> */}
+            </div>
           </div>
+
+          {/* App Name */}
           <h1
-            className={`${playfairDisplay.className} tracking-tight text-[#2d4c4c] dark:text-[#f5e8d3] text-4xl md:text-6xl max-w-sm md:max-w-lg font-light`}
+            className={`${inter.className} text-[#dedede] text-5xl md:text-7xl font-bold tracking-tight`}
+            style={{ color: "#dedede" }}
           >
-            The new social network for music.
+            Echo
           </h1>
-          <p
-            className={`${inter.className} text-[#4a6464] dark:text-[#d0c2a7] text-2xl mt-8 font-light tracking-wide`}
-          >
-            Out now on iOS.
-          </p>
-          <Link
-            href="https://apps.apple.com/app/echo-rank-rate-relisten/id6717572746"
-            target="_blank"
-            className="w-fit hover:opacity-80 transition-opacity mt-4"
-          >
-            <Image
-              src="/Download_on_the_App_Store_Badge_US-UK_RGB_blk_092917.svg"
-              alt="Download on the App Store"
-              width={160}
-              height={53}
-              priority
-              className="dark:invert"
-            />
-          </Link>
 
-          <div className="mt-8 max-w-lg">
-            <Image
-              src="/echo_gen.png"
-              alt="People enjoying music together"
-              width={600}
-              height={400}
-              className="rounded-lg shadow-md"
-            />
+          {/* Tagline */}
+          <p
+            className={`${inter.className} text-[#dedede] text-xl md:text-2xl font-light tracking-wide opacity-90`}
+            style={{ color: "#dedede" }}
+          >
+            The new social network for music
+          </p>
+
+          {/* Download Buttons */}
+          <div className="flex flex-col md:flex-row gap-4">
+            {/* iOS Download Button */}
+            <Link
+              href="https://apps.apple.com/app/echo-rank-rate-relisten/id6717572746"
+              target="_blank"
+              className={`${inter.className} px-8 py-4 rounded-full text-[#dedede] font-medium text-lg transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 flex items-center gap-2`}
+              style={{
+                backgroundColor: "#212529",
+                color: "#dedede",
+              }}
+            >
+              Download on iOS
+              <FaApple size={20} />
+            </Link>
+
+            {/* Android Download Button */}
+            <Link
+              href="https://play.google.com/store/apps/details?id=com.utkarshuppal.Echo"
+              target="_blank"
+              className={`${inter.className} px-8 py-4 rounded-full text-[#dedede] font-medium text-lg transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 flex items-center gap-2`}
+              style={{
+                backgroundColor: "#212529",
+                color: "#dedede",
+              }}
+            >
+              Download on Android
+              <FaAndroid size={20} />
+            </Link>
           </div>
 
-          {/* <div className="max-w-xl">
+          {/* QR Code */}
+          <div className="mt-4">
             <Image
-              src="/waitlist.png"
-              alt="Echo App Screenshots"
-              width={700}
-              height={466}
+              src="/qrcode.png"
+              alt="QR Code"
+              width={200}
+              height={200}
               className="rounded-lg"
             />
-          </div> */}
-
-          <footer
-            className={`${inter.className} text-[#4a6464] dark:text-[#d0c2a7] text-sm mt-12 mb-6 opacity-80`}
-          >
-            © 2025 Echo Social, Inc. All rights reserved.
-            <div className="mt-2">
-              <Link href="/privacy" className="hover:underline mr-4">
-                Privacy Policy
-              </Link>
-              <Link href="/support" className="hover:underline">
-                Support
-              </Link>
-            </div>
-          </footer>
+          </div>
         </main>
       </section>
+
+      {/* Footer - Fixed at bottom */}
+      <footer
+        className={`${inter.className} fixed bottom-0 left-0 right-0 text-[#dedede] text-sm py-4 opacity-60 text-center`}
+        style={{ color: "#dedede" }}
+      >
+        <div className="space-x-6">
+          <Link href="/privacy" className="hover:opacity-80">
+            Privacy Policy
+          </Link>
+          <Link href="/support" className="hover:opacity-80">
+            Contact Us
+          </Link>
+          {/* <Link href="/terms" className="hover:opacity-80">
+            Terms of Service
+          </Link> */}
+        </div>
+      </footer>
+
       <Toaster position={isMobile ? "bottom-center" : "top-center"} />
     </>
   );

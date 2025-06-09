@@ -80,12 +80,19 @@ export default async function ProfilePage({ params }: Props) {
 
       <h1 className="text-xl font-bold mb-4">Opening Echo...</h1>
       <p>
-        If nothing happens,{" "}
+        If nothing happens, download Echo from the{" "}
         <a
           href="https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746"
           className="text-blue-600 underline"
         >
-          download Echo from the App Store
+          App Store
+        </a>{" "}
+        or{" "}
+        <a
+          href="https://play.google.com/store/apps/details?id=com.utkarshuppal.Echo"
+          className="text-blue-600 underline"
+        >
+          Google Play
         </a>
       </p>
     </div>

@@ -13,10 +13,14 @@ export default function ClientRedirect({
 }: ClientRedirectProps) {
   useEffect(() => {
     if (!userId) {
-      // If no user ID found, redirect to App Store after a short delay
+      // If no user ID found, redirect to appropriate store after a short delay
+      const isAndroid = /Android/.test(navigator.userAgent);
+      const storeUrl = isAndroid
+        ? "https://play.google.com/store/apps/details?id=com.utkarshuppal.Echo"
+        : "https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746";
+
       setTimeout(() => {
-        window.location.href =
-          "https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746";
+        window.location.href = storeUrl;
       }, 2000);
       return;
     }
@@ -27,13 +31,13 @@ export default function ClientRedirect({
     // Determine device type to choose correct store link
     const isIOS =
       /iPad|iPhone|iPod/.test(navigator.userAgent) && !(window as any).MSStream;
-    // const isAndroid = /Android/.test(navigator.userAgent);
+    const isAndroid = /Android/.test(navigator.userAgent);
 
     const storeUrl = isIOS
       ? "https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746"
-      : // : isAndroid
-        // ? "https://play.google.com/store/apps/details?id=app.echo"
-        "https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746";
+      : isAndroid
+      ? "https://play.google.com/store/apps/details?id=com.utkarshuppal.Echo"
+      : "https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746";
 
     // Redirect to the appropriate store after a short delay
     setTimeout(() => {
