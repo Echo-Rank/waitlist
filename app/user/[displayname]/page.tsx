@@ -26,7 +26,7 @@ export async function generateMetadata(
 
   // Absolute URL for the Echo icon and site
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://echorank.app";
-  const echoIconUrl = `${siteUrl}/Echo.png`;
+  const pageUrl = `${siteUrl}/user/${displayname}`;
 
   // URL for the dynamically generated profile card image
   const profileCardUrl = `${siteUrl}/api/profile-card/${displayname}`;
@@ -34,15 +34,19 @@ export async function generateMetadata(
   return {
     title: previewText,
     description: "echorank.app",
+    metadataBase: new URL(siteUrl),
     openGraph: {
       title: previewText,
       description: "echorank.app",
+      url: pageUrl,
+      type: "profile",
       images: [
         {
           url: profileCardUrl,
           width: 800,
           height: 418,
           alt: previewText,
+          type: "image/png",
         },
       ],
       siteName: "Echo",
@@ -52,6 +56,7 @@ export async function generateMetadata(
       title: previewText,
       description: "echorank.app",
       images: [profileCardUrl],
+      site: "@echodotapp",
     },
     other: {
       "theme-color": "#000000",
