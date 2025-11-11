@@ -1,11 +1,31 @@
 "use client";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import Image from "next/image";
 import Link from "next/link";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+const geist = localFont({
+  src: [
+    {
+      path: "../../public/fonts/Geist-Light.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Geist-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Geist-Medium.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../../public/fonts/Geist-SemiBold.otf",
+      weight: "600",
+      style: "normal",
+    },
+  ],
 });
 
 export default function Privacy() {
@@ -17,16 +37,18 @@ export default function Privacy() {
       >
         <div className="max-w-4xl mx-auto px-6 py-12">
           <div className="flex items-center gap-4 mb-8">
-            <Image
-              src="/Echo.png"
-              alt="Echo Logo"
-              width={50}
-              height={50}
-              className="brightness-0 invert -ml-3"
-              style={{ filter: "brightness(0) invert(1)" }}
-            />
+            <Link href="/">
+              <Image
+                src="/Echo.png"
+                alt="Echo Logo"
+                width={50}
+                height={50}
+                className="brightness-0 invert -ml-3 cursor-pointer hover:opacity-80 transition-opacity"
+                style={{ filter: "brightness(0) invert(1)" }}
+              />
+            </Link>
             <h1
-              className={`${inter.className} font-semibold tracking-tight text-[#dedede] text-3xl`}
+              className={`${geist.className} font-semibold tracking-tight text-[#dedede] text-3xl`}
               style={{ color: "#dedede" }}
             >
               Privacy Policy
@@ -35,20 +57,20 @@ export default function Privacy() {
 
           <div className="prose prose-invert max-w-none">
             <p
-              className={`${inter.className} text-sm text-[#dedede] opacity-60`}
+              className={`${geist.className} text-sm text-[#dedede] opacity-60`}
               style={{ color: "#dedede" }}
             >
               Last Updated: March 25, 2025
             </p>
 
             <h2
-              className={`${inter.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
+              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
               style={{ color: "#dedede" }}
             >
               1. Introduction
             </h2>
             <p
-              className={`${inter.className} text-[#dedede] opacity-90`}
+              className={`${geist.className} text-[#dedede] opacity-90`}
               style={{ color: "#dedede" }}
             >
               Thank you for being a user of Echo ("we," "our," or "us"). We
@@ -59,13 +81,13 @@ export default function Privacy() {
             </p>
 
             <h2
-              className={`${inter.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
+              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
               style={{ color: "#dedede" }}
             >
               2. Definitions
             </h2>
             <ul
-              className={`${inter.className} list-disc pl-5 text-[#dedede] opacity-90`}
+              className={`${geist.className} list-disc pl-5 text-[#dedede] opacity-90`}
               style={{ color: "#dedede" }}
             >
               <li>
@@ -95,13 +117,13 @@ export default function Privacy() {
             </ul>
 
             <h2
-              className={`${inter.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
+              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
               style={{ color: "#dedede" }}
             >
               3. Information We Collect
             </h2>
             <ul
-              className={`${inter.className} list-disc pl-5 text-[#dedede] opacity-90`}
+              className={`${geist.className} list-disc pl-5 text-[#dedede] opacity-90`}
               style={{ color: "#dedede" }}
             >
               <li>
@@ -130,13 +152,13 @@ export default function Privacy() {
             </ul>
 
             <h2
-              className={`${inter.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
+              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
               style={{ color: "#dedede" }}
             >
               4. How We Use Your Information
             </h2>
             <ul
-              className={`${inter.className} list-disc pl-5 text-[#dedede] opacity-90`}
+              className={`${geist.className} list-disc pl-5 text-[#dedede] opacity-90`}
               style={{ color: "#dedede" }}
             >
               <li>Provide and improve our services</li>
@@ -148,13 +170,13 @@ export default function Privacy() {
             </ul>
 
             <h2
-              className={`${inter.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
+              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
               style={{ color: "#dedede" }}
             >
               5. Data Storage and Processing
             </h2>
             <p
-              className={`${inter.className} text-[#dedede] opacity-90`}
+              className={`${geist.className} text-[#dedede] opacity-90`}
               style={{ color: "#dedede" }}
             >
               We use Supabase for database services and Google Cloud Platform
@@ -164,19 +186,19 @@ export default function Privacy() {
             </p>
 
             <h2
-              className={`${inter.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
+              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
               style={{ color: "#dedede" }}
             >
               6. Data Sharing and Disclosure
             </h2>
             <p
-              className={`${inter.className} text-[#dedede] opacity-90`}
+              className={`${geist.className} text-[#dedede] opacity-90`}
               style={{ color: "#dedede" }}
             >
               We share your information with:
             </p>
             <ul
-              className={`${inter.className} list-disc pl-5 text-[#dedede] opacity-90`}
+              className={`${geist.className} list-disc pl-5 text-[#dedede] opacity-90`}
               style={{ color: "#dedede" }}
             >
               <li>Other Echo users (based on your privacy settings)</li>
@@ -192,19 +214,19 @@ export default function Privacy() {
             </ul>
 
             <h2
-              className={`${inter.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
+              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
               style={{ color: "#dedede" }}
             >
               7. Your Privacy Rights
             </h2>
             <p
-              className={`${inter.className} text-[#dedede] opacity-90`}
+              className={`${geist.className} text-[#dedede] opacity-90`}
               style={{ color: "#dedede" }}
             >
               You have the right to:
             </p>
             <ul
-              className={`${inter.className} list-disc pl-5 text-[#dedede] opacity-90`}
+              className={`${geist.className} list-disc pl-5 text-[#dedede] opacity-90`}
               style={{ color: "#dedede" }}
             >
               <li>Access your personal data</li>
@@ -216,13 +238,13 @@ export default function Privacy() {
             </ul>
 
             <h2
-              className={`${inter.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
+              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
               style={{ color: "#dedede" }}
             >
               8. Data Security
             </h2>
             <p
-              className={`${inter.className} text-[#dedede] opacity-90`}
+              className={`${geist.className} text-[#dedede] opacity-90`}
               style={{ color: "#dedede" }}
             >
               We implement industry-standard security measures through our
@@ -233,13 +255,13 @@ export default function Privacy() {
             </p>
 
             <h2
-              className={`${inter.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
+              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
               style={{ color: "#dedede" }}
             >
               9. Data Retention
             </h2>
             <p
-              className={`${inter.className} text-[#dedede] opacity-90`}
+              className={`${geist.className} text-[#dedede] opacity-90`}
               style={{ color: "#dedede" }}
             >
               We retain your data only as long as necessary to fulfill the
@@ -249,13 +271,13 @@ export default function Privacy() {
             </p>
 
             <h2
-              className={`${inter.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
+              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
               style={{ color: "#dedede" }}
             >
               10. Children's Privacy
             </h2>
             <p
-              className={`${inter.className} text-[#dedede] opacity-90`}
+              className={`${geist.className} text-[#dedede] opacity-90`}
               style={{ color: "#dedede" }}
             >
               Our services are not intended for users under the age of 13. We do
@@ -264,13 +286,13 @@ export default function Privacy() {
             </p>
 
             <h2
-              className={`${inter.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
+              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
               style={{ color: "#dedede" }}
             >
               11. Changes to This Policy
             </h2>
             <p
-              className={`${inter.className} text-[#dedede] opacity-90`}
+              className={`${geist.className} text-[#dedede] opacity-90`}
               style={{ color: "#dedede" }}
             >
               We may update this Privacy Policy from time to time. We will
@@ -280,20 +302,20 @@ export default function Privacy() {
             </p>
 
             <h2
-              className={`${inter.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
+              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
               style={{ color: "#dedede" }}
             >
               12. Contact Us
             </h2>
             <p
-              className={`${inter.className} text-[#dedede] opacity-90`}
+              className={`${geist.className} text-[#dedede] opacity-90`}
               style={{ color: "#dedede" }}
             >
               If you have any questions about this Privacy Policy, please
               contact us at:{" "}
               <Link
                 href="mailto:utkarsh@echorank.app"
-                className={`${inter.className} text-[#dedede] underline hover:opacity-80`}
+                className={`${geist.className} text-[#dedede] underline hover:opacity-80`}
                 style={{ color: "#dedede" }}
               >
                 utkarsh@echorank.app
@@ -303,7 +325,7 @@ export default function Privacy() {
             <div className="mt-12 pt-8 border-t border-[#333]">
               <Link
                 href="/"
-                className={`${inter.className} text-[#dedede] hover:opacity-80`}
+                className={`${geist.className} text-[#dedede] hover:opacity-80`}
                 style={{ color: "#dedede" }}
               >
                 ← Back to Home
@@ -315,7 +337,7 @@ export default function Privacy() {
 
       {/* Footer - Fixed at bottom */}
       <footer
-        className={`${inter.className} fixed bottom-0 left-0 right-0 text-[#dedede] text-sm py-4 opacity-60 text-center`}
+        className={`${geist.className} fixed bottom-0 left-0 right-0 text-[#dedede] text-sm py-4 opacity-60 text-center`}
         style={{ color: "#dedede" }}
       >
         <div className="space-x-6">
@@ -324,6 +346,9 @@ export default function Privacy() {
           </Link>
           <Link href="/support" className="hover:opacity-80">
             Contact Us
+          </Link>
+          <Link href="/careers" className="hover:opacity-80">
+            Careers
           </Link>
           {/* <Link href="/terms" className="hover:opacity-80">
             Terms of Service

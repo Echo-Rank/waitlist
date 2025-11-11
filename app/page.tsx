@@ -1,14 +1,36 @@
 "use client";
-import { Inter } from "next/font/google";
+import localFont from "next/font/local";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Toaster } from "react-hot-toast";
-import { FaAndroid, FaApple } from "react-icons/fa";
+import { FaAndroid, FaApple, FaDiscord, FaReddit } from "react-icons/fa";
+import { FaXTwitter } from "react-icons/fa6";
+import { RiInstagramFill } from "react-icons/ri";
 
-const inter = Inter({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+const geist = localFont({
+  src: [
+    {
+      path: "../public/fonts/Geist-Light.otf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Geist-Regular.otf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Geist-Medium.otf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../public/fonts/Geist-SemiBold.otf",
+      weight: "600",
+      style: "normal",
+    },
+  ],
 });
 
 export default function Home() {
@@ -41,7 +63,7 @@ export default function Home() {
 
           {/* App Name */}
           <h1
-            className={`${inter.className} text-[#dedede] text-5xl md:text-7xl font-bold tracking-tight`}
+            className={`${geist.className} text-[#dedede] text-5xl md:text-7xl font-bold tracking-tight`}
             style={{ color: "#dedede" }}
           >
             Echo
@@ -49,7 +71,7 @@ export default function Home() {
 
           {/* Tagline */}
           <p
-            className={`${inter.className} text-[#dedede] text-xl md:text-2xl font-light tracking-wide opacity-90`}
+            className={`${geist.className} text-[#dedede] text-xl md:text-2xl font-light tracking-wide opacity-90`}
             style={{ color: "#dedede" }}
           >
             The new social network for music
@@ -61,7 +83,7 @@ export default function Home() {
             <Link
               href="https://apps.apple.com/app/echo-rank-rate-relisten/id6717572746"
               target="_blank"
-              className={`${inter.className} px-8 py-4 rounded-full text-[#dedede] font-medium text-lg transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 flex items-center gap-2`}
+              className={`${geist.className} px-8 py-4 rounded-full text-[#dedede] font-medium text-lg transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 flex items-center gap-2`}
               style={{
                 backgroundColor: "#212529",
                 color: "#dedede",
@@ -75,7 +97,7 @@ export default function Home() {
             <Link
               href="https://play.google.com/store/apps/details?id=com.utkarshuppal.Echo"
               target="_blank"
-              className={`${inter.className} px-8 py-4 rounded-full text-[#dedede] font-medium text-lg transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 flex items-center gap-2`}
+              className={`${geist.className} px-8 py-4 rounded-full text-[#dedede] font-medium text-lg transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 flex items-center gap-2`}
               style={{
                 backgroundColor: "#212529",
                 color: "#dedede",
@@ -96,12 +118,48 @@ export default function Home() {
               className="rounded-lg"
             />
           </div>
+
+          {/* Social Media Buttons */}
+          <div className="flex gap-4 mt-6">
+            <Link
+              href="https://instagram.com/echodotapp"
+              target="_blank"
+              className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ease-in-out hover:scale-110 active:scale-95"
+              style={{ backgroundColor: "#212529" }}
+            >
+              <RiInstagramFill className="text-[#dedede] w-6 h-6" />
+            </Link>
+            <Link
+              href="https://twitter.com/echodotapp"
+              target="_blank"
+              className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ease-in-out hover:scale-110 active:scale-95"
+              style={{ backgroundColor: "#212529" }}
+            >
+              <FaXTwitter className="text-[#dedede] w-5 h-5" />
+            </Link>
+            <Link
+              href="https://discord.gg/YBEyaEd2dG"
+              target="_blank"
+              className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ease-in-out hover:scale-110 active:scale-95"
+              style={{ backgroundColor: "#212529" }}
+            >
+              <FaDiscord className="text-[#dedede] w-6 h-6" />
+            </Link>
+            <Link
+              href="https://www.reddit.com/r/echorank/"
+              target="_blank"
+              className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ease-in-out hover:scale-110 active:scale-95"
+              style={{ backgroundColor: "#212529" }}
+            >
+              <FaReddit className="text-[#dedede] w-6 h-6" />
+            </Link>
+          </div>
         </main>
       </section>
 
       {/* Footer - Fixed at bottom */}
       <footer
-        className={`${inter.className} fixed bottom-0 left-0 right-0 text-[#dedede] text-sm py-4 opacity-60 text-center`}
+        className={`${geist.className} fixed bottom-0 left-0 right-0 text-[#dedede] text-sm py-4 opacity-60 text-center`}
         style={{ color: "#dedede" }}
       >
         <div className="space-x-6">
@@ -110,6 +168,9 @@ export default function Home() {
           </Link>
           <Link href="/support" className="hover:opacity-80">
             Contact Us
+          </Link>
+          <Link href="/careers" className="hover:opacity-80">
+            Careers
           </Link>
           {/* <Link href="/terms" className="hover:opacity-80">
             Terms of Service
