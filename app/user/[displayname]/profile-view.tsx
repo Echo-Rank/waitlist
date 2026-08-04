@@ -1016,10 +1016,10 @@ export default function ProfileView({ profile, content, links }: ProfileViewProp
         {/* Footer */}
         <footer className="mt-12 flex flex-col items-center gap-2 text-center">
           <p className="text-[13px] text-neutral-400">
-            Rank, rate &amp; relisten on{" "}
             <a href="https://echorank.app" className="font-semibold text-neutral-600">
               Echo
-            </a>
+            </a>{" "}
+            - Rank music!
           </p>
           <div className="flex gap-4 text-[13px]">
             <a href={APP_STORE_URL} className="text-sky-600 underline">
