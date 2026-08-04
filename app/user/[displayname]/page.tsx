@@ -1,10 +1,17 @@
-import { getProfileByDisplayName } from "@/lib/supabase";
+import {
+  getCanvasContent,
+  getFullProfile,
+  getProfileLinks,
+  getUserIdByDisplayname,
+} from "@/lib/echoApi";
 import { Metadata, ResolvingMetadata } from "next";
-import ClientRedirect from "./redirect-client";
+import ProfileView from "./profile-view";
 
 type Props = {
   params: { displayname: string };
 };
+
+export const revalidate = 60;
 
 // Generate metadata for SEO
 export async function generateMetadata(
@@ -12,14 +19,6 @@ export async function generateMetadata(
   parent: ResolvingMetadata
 ): Promise<Metadata> {
   const { displayname } = params;
-
-  // Get profile data to use profile picture in metadata
-  const { data } = await getProfileByDisplayName(displayname);
-
-  // Build description for text-only previews
-  const firstName = data?.firstname || "";
-  const lastName = data?.lastname || "";
-  const fullName = `${firstName} ${lastName}`.trim();
 
   // Preview text should say "Follow @displayname on Echo"
   const previewText = `Follow @${displayname} on Echo`;
@@ -59,7 +58,7 @@ export async function generateMetadata(
       site: "@echodotapp",
     },
     other: {
-      "theme-color": "#000000",
+      "theme-color": "#ffffff",
     },
   };
 }
@@ -67,34 +66,41 @@ export async function generateMetadata(
 export default async function ProfilePage({ params }: Props) {
   const { displayname } = params;
 
-  // Get profile data from Supabase
-  const { data, error } = await getProfileByDisplayName(displayname);
+  // Resolve the displayname to a user id via the core API
+  const userId = await getUserIdByDisplayname(displayname);
 
-  // If profile not found, we'll still render the client component
-  // that will handle the redirect to main site
-  const userId = data?.id || null;
+  // Hydrate the full profile + canvas from the core API
+  const [profile, content, links] = userId
+    ? await Promise.all([
+        getFullProfile(userId),
+        getCanvasContent(userId),
+        getProfileLinks(userId),
+      ])
+    : [null, {}, []];
 
-  return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-4 text-center">
-      <ClientRedirect userId={userId} displayname={displayname} />
+  if (!userId || !profile) {
+    return (
+      <main className="flex min-h-screen flex-col items-center justify-center bg-white p-4 text-center text-neutral-900">
+        <h1 className="mb-2 text-xl font-bold">Profile not found</h1>
+        <p className="text-neutral-500">
+          Download Echo from the{" "}
+          <a
+            href="https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746"
+            className="text-sky-600 underline"
+          >
+            App Store
+          </a>{" "}
+          or{" "}
+          <a
+            href="https://play.google.com/store/apps/details?id=com.utkarshuppal.Echo"
+            className="text-sky-600 underline"
+          >
+            Google Play
+          </a>
+        </p>
+      </main>
+    );
+  }
 
-      <h1 className="text-xl font-bold mb-4">Opening Echo...</h1>
-      <p>
-        If nothing happens, download Echo from the{" "}
-        <a
-          href="https://apps.apple.com/us/app/echo-rank-rate-relisten/id6717572746"
-          className="text-blue-600 underline"
-        >
-          App Store
-        </a>{" "}
-        or{" "}
-        <a
-          href="https://play.google.com/store/apps/details?id=com.utkarshuppal.Echo"
-          className="text-blue-600 underline"
-        >
-          Google Play
-        </a>
-      </p>
-    </div>
-  );
+  return <ProfileView profile={profile} content={content} links={links} />;
 }

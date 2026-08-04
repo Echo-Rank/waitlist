@@ -2,3 +2,35 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Profile canvas grid — square cells sized off the container width, so the
+   3-column modular grid keeps square units at any viewport (mirrors the
+   mobile canvas where row height == cell width). */
+.canvas-container {
+  container-type: inline-size;
+}
+.canvas-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+  grid-auto-rows: calc((100vw - 48px) / 3);
+}
+@supports (width: 1cqw) {
+  .canvas-grid {
+    grid-auto-rows: calc((100cqw - 16px) / 3);
+  }
+}
+
+@keyframes canvas-live-pulse {
+  0%,
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.35;
+    transform: scale(0.85);
+  }
+}
+.canvas-live-dot {
+  animation: canvas-live-pulse 1.8s ease-in-out infinite;
+}
