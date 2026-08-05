@@ -1,127 +1,50 @@
-"use client";
-import localFont from "next/font/local";
-import Image from "next/image";
 import Link from "next/link";
+import { PageShell } from "@/components/site";
 
-const geist = localFont({
-  src: [
-    {
-      path: "../../public/fonts/Geist-Light.otf",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Geist-Regular.otf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Geist-Medium.otf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Geist-SemiBold.otf",
-      weight: "600",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Geist-Bold.otf",
-      weight: "700",
-      style: "normal",
-    },
-  ],
-});
+const OPENINGS = [
+  {
+    href: "/careers/social-media-intern",
+    title: "Social Media Marketing Intern",
+    location: "New York, NY (remote)",
+  },
+];
 
 export default function Careers() {
   return (
-    <>
-      <section
-        className="w-screen min-h-screen bg-[#121212]"
-        style={{ backgroundColor: "#121212" }}
-      >
-        <div className="max-w-4xl mx-auto px-6 py-12">
-          {/* Header */}
-          <div className="flex items-center gap-4 mb-8">
-            <Link href="/">
-              <Image
-                src="/Echo.png"
-                alt="Echo Logo"
-                width={50}
-                height={50}
-                className="brightness-0 invert -ml-3 cursor-pointer hover:opacity-80 transition-opacity"
-                style={{ filter: "brightness(0) invert(1)" }}
-              />
-            </Link>
-            <h1
-              className={`${geist.className} font-semibold tracking-tight text-[#dedede] text-3xl`}
-              style={{ color: "#dedede" }}
+    <PageShell
+      title="Careers"
+      meta="Help us build the social network for music."
+    >
+      <h2 className="!mt-0">Open positions</h2>
+      <div className="flex flex-col gap-3">
+        {OPENINGS.map(({ href, title, location }) => (
+          <Link
+            key={href}
+            href={href}
+            className="group flex items-center justify-between gap-4 rounded-2xl bg-white/55 p-6 !no-underline ring-1 ring-inset ring-[#2B1F27]/[0.07] backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-white/80"
+          >
+            <span>
+              <span className="block text-lg font-semibold tracking-[-0.01em] text-[#2B1F27]">
+                {title}
+              </span>
+              <span className="mt-1 block text-sm text-[#6A5F6D]">
+                {location}
+              </span>
+            </span>
+            <span
+              aria-hidden
+              className="text-xl text-[#6A5F6D] transition-transform duration-200 group-hover:translate-x-1"
             >
-              Careers at Echo
-            </h1>
-          </div>
-
-          {/* Open Positions */}
-          <div className="mb-8">
-            <h2
-              className={`${geist.className} text-2xl font-semibold text-[#dedede] mb-6`}
-              style={{ color: "#dedede" }}
-            >
-              Open Positions
-            </h2>
-
-            {/* Job Card - Social Media Marketing Intern */}
-            <Link href="/careers/social-media-intern">
-              <div
-                className="bg-[#212529] rounded-lg p-6 shadow-sm hover:bg-[#2a2f35] transition-colors duration-200 cursor-pointer mb-4"
-                style={{ backgroundColor: "#212529" }}
-              >
-                <h3
-                  className={`${geist.className} text-xl font-semibold text-[#dedede] mb-2`}
-                  style={{ color: "#dedede" }}
-                >
-                  Social Media Marketing Intern
-                </h3>
-                <p
-                  className={`${geist.className} text-[#dedede] opacity-75 text-sm`}
-                  style={{ color: "#dedede" }}
-                >
-                  New York, NY (remote)
-                </p>
-              </div>
-            </Link>
-          </div>
-
-          {/* Back to Home */}
-          <div className="mt-12 pt-8 border-t border-[#333]">
-            <Link
-              href="/"
-              className={`${geist.className} text-[#dedede] hover:opacity-80`}
-              style={{ color: "#dedede" }}
-            >
-              ← Back to Home
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer - Fixed at bottom */}
-      <footer
-        className={`${geist.className} fixed bottom-0 left-0 right-0 text-[#dedede] text-sm py-4 opacity-60 text-center`}
-        style={{ color: "#dedede" }}
-      >
-        <div className="space-x-6">
-          <Link href="/privacy" className="hover:opacity-80">
-            Privacy Policy
+              →
+            </span>
           </Link>
-          <Link href="/support" className="hover:opacity-80">
-            Contact Us
-          </Link>
-          <Link href="/careers" className="hover:opacity-80">
-            Careers
-          </Link>
-        </div>
-      </footer>
-    </>
+        ))}
+      </div>
+
+      <p className="mt-8 text-sm text-[#6A5F6D]">
+        Don&rsquo;t see your role? Tell us what you&rsquo;d build at{" "}
+        <Link href="mailto:utkarsh@echorank.app">utkarsh@echorank.app</Link>.
+      </p>
+    </PageShell>
   );
 }

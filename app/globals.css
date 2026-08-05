@@ -20,6 +20,112 @@
   }
 }
 
+/* Pastel wash shared by every marketing page. The gradient is pinned to the
+   first 1600px and the page colour continues in the pink end tone, so long
+   policy pages don't stretch it into a flat wash. */
+.echo-surface {
+  background-color: #fde4e6;
+  background-image: linear-gradient(
+    172deg,
+    #f3f2fd 0%,
+    #f4f0fb 28%,
+    #f9edf3 60%,
+    #fde4e6 100%
+  );
+  background-repeat: no-repeat;
+  background-size: 100% 1600px;
+}
+
+/* Long-form copy on the content pages. Keeps those pages as plain semantic
+   markup instead of repeating the same classes on every heading and list. */
+.page-prose {
+  color: #5b5163;
+  font-size: 1.0625rem;
+  line-height: 1.7;
+}
+.page-prose h2 {
+  margin-top: 2.5rem;
+  margin-bottom: 0.75rem;
+  color: #2b1f27;
+  font-size: 1.375rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.page-prose h3 {
+  margin-top: 2rem;
+  margin-bottom: 0.5rem;
+  color: #2b1f27;
+  font-size: 1.125rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.page-prose p {
+  margin-bottom: 1rem;
+}
+.page-prose ul {
+  margin-bottom: 1rem;
+  padding-left: 1.25rem;
+  list-style: disc;
+}
+.page-prose li {
+  margin-bottom: 0.4rem;
+}
+.page-prose li::marker {
+  color: #c9a4b1;
+}
+.page-prose strong {
+  color: #2b1f27;
+  font-weight: 600;
+}
+.page-prose a {
+  color: #2b1f27;
+  text-decoration: underline;
+  text-decoration-color: rgba(43, 31, 39, 0.3);
+  text-underline-offset: 3px;
+  transition: text-decoration-color 0.2s;
+}
+.page-prose a:hover {
+  text-decoration-color: currentColor;
+}
+.page-prose > :first-child,
+.page-prose section > :first-child {
+  margin-top: 0;
+}
+.page-prose > :last-child,
+.page-prose section > :last-child {
+  margin-bottom: 0;
+}
+
+/* Home page screenshot rail — snap-scrolls on narrow viewports, centers when
+   all five cards fit. Scrollbar hidden so the cards read as a gallery. */
+.shot-rail {
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  overscroll-behavior-x: contain;
+}
+.shot-rail::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+.rise {
+  animation: rise 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@media (prefers-reduced-motion: reduce) {
+  .rise {
+    animation: none;
+  }
+}
+
 @keyframes canvas-live-pulse {
   0%,
   100% {

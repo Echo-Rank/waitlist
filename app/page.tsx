@@ -1,184 +1,134 @@
-"use client";
-import localFont from "next/font/local";
 import Image from "next/image";
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import { Toaster } from "react-hot-toast";
-import { FaAndroid, FaApple, FaDiscord, FaReddit } from "react-icons/fa";
-import { FaXTwitter } from "react-icons/fa6";
-import { RiInstagramFill } from "react-icons/ri";
+import {
+  EchoLockup,
+  SiteFooter,
+  SocialLinks,
+  StoreButtons,
+  Surface,
+} from "@/components/site";
 
-const geist = localFont({
-  src: [
-    {
-      path: "../public/fonts/Geist-Light.otf",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Geist-Regular.otf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Geist-Medium.otf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../public/fonts/Geist-SemiBold.otf",
-      weight: "600",
-      style: "normal",
-    },
-  ],
-});
+const SHOTS = [
+  {
+    src: "/screenshots/01-social-network.webp",
+    alt: "Echo's Rank tab, showing a daily lineup and today's picks",
+  },
+  {
+    src: "/screenshots/02-connect.webp",
+    alt: "The Echo feed, with discussions from the people you follow",
+  },
+  {
+    src: "/screenshots/03-rank.webp",
+    alt: "Ranking music on Echo by comparing two albums head to head",
+  },
+  {
+    src: "/screenshots/04-hot-takes.webp",
+    alt: "An Echo discussion thread full of hot takes and tagged albums",
+  },
+  {
+    src: "/screenshots/05-charts.webp",
+    alt: "The Echo 100 chart, the Pulse swipe deck, and a profile canvas",
+  },
+];
 
 export default function Home() {
-  const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    setIsMobile(window.innerWidth < 1024);
-  }, []);
-
   return (
-    <>
-      <section
-        className="w-screen min-h-screen flex flex-col items-center justify-center bg-[#121212]"
-        style={{ backgroundColor: "#121212" }}
-      >
-        <main className="flex flex-col items-center gap-8 px-6 text-center">
-          {/* Logo */}
-          <div className="flex items-center">
-            <div className="relative">
-              <Image
-                src="/Echo.png"
-                alt="Echo Logo"
-                width={120}
-                height={120}
-                className="brightness-0 invert"
-                style={{ filter: "brightness(0) invert(1)" }}
-              />
-            </div>
+    <Surface>
+      {/* ------------------------------------------------------------- Hero */}
+      <header className="mx-auto flex max-w-3xl flex-col items-center px-6 pb-16 pt-24 text-center sm:pt-28">
+        <div className="rise">
+          <EchoLockup size="lg" />
+        </div>
+
+        {/* Balanced wrapping only from `sm` up — at phone widths it strands
+            "network" on its own line, where the greedy wrap reads better. */}
+        <h1
+          className="rise mt-10 text-[2.75rem] font-bold leading-[0.98] tracking-[-0.045em] sm:text-balance sm:text-6xl lg:text-[4.25rem]"
+          style={{ animationDelay: "60ms" }}
+        >
+          The new social network for music.
+        </h1>
+
+        <p
+          className="rise mt-6 max-w-md text-pretty text-lg leading-relaxed text-[#6A5F6D] sm:text-xl"
+          style={{ animationDelay: "120ms" }}
+        >
+          Rank what you love, drop your hot takes, and climb the charts with
+          friends.
+        </p>
+
+        <div
+          className="rise mt-10 flex w-full flex-col items-stretch gap-3 sm:w-auto sm:flex-row sm:items-center"
+          style={{ animationDelay: "180ms" }}
+        >
+          <StoreButtons />
+        </div>
+
+        <div className="rise mt-8" style={{ animationDelay: "240ms" }}>
+          <SocialLinks />
+        </div>
+
+        <div
+          className="rise mt-10 hidden items-center gap-3.5 rounded-2xl bg-white/55 p-3 pr-5 ring-1 ring-inset ring-[#2B1F27]/[0.07] backdrop-blur lg:flex"
+          style={{ animationDelay: "300ms" }}
+        >
+          <Image
+            src="/qrcode.png"
+            alt="QR code linking to the Echo app download"
+            width={200}
+            height={200}
+            className="h-20 w-20 rounded-lg"
+          />
+          <span className="text-left text-sm leading-snug text-[#6A5F6D]">
+            Scan to download
+            <br />
+            on your phone
+          </span>
+        </div>
+      </header>
+
+      {/* ------------------------------------------------------- Screenshots */}
+      <section aria-labelledby="inside" className="pb-20">
+        <h2
+          id="inside"
+          className="px-6 text-center text-xs font-medium uppercase tracking-[0.22em] text-[#6A5F6D]/70"
+        >
+          A look inside
+        </h2>
+
+        {/* The inner track is `w-max mx-auto` so the five cards centre when
+            they fit and scroll from the left edge when they don't. */}
+        <div className="shot-rail mt-8 snap-x snap-mandatory overflow-x-auto pb-6">
+          <div className="mx-auto flex w-max gap-4 px-6 sm:gap-6 sm:px-10">
+            {SHOTS.map(({ src, alt }) => (
+              <div
+                key={src}
+                className="w-60 shrink-0 snap-center overflow-hidden rounded-[26px] shadow-[0_24px_60px_-28px_rgba(43,31,39,0.5)] ring-1 ring-inset ring-[#2B1F27]/[0.06] transition duration-300 hover:-translate-y-1.5 sm:w-64"
+              >
+                <Image
+                  src={src}
+                  alt={alt}
+                  width={1170}
+                  height={2536}
+                  sizes="(min-width: 640px) 256px, 240px"
+                  className="h-auto w-full"
+                />
+              </div>
+            ))}
           </div>
-
-          {/* App Name */}
-          <h1
-            className={`${geist.className} text-[#dedede] text-5xl md:text-7xl font-bold tracking-tight`}
-            style={{ color: "#dedede" }}
-          >
-            Echo
-          </h1>
-
-          {/* Tagline */}
-          <p
-            className={`${geist.className} text-[#dedede] text-xl md:text-2xl font-light tracking-wide opacity-90`}
-            style={{ color: "#dedede" }}
-          >
-            The new social network for music
-          </p>
-
-          {/* Download Buttons */}
-          <div className="flex flex-col md:flex-row gap-4">
-            {/* iOS Download Button */}
-            <Link
-              href="https://apps.apple.com/app/echo-rank-rate-relisten/id6717572746"
-              target="_blank"
-              className={`${geist.className} px-8 py-4 rounded-full text-[#dedede] font-medium text-lg transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 flex items-center gap-2`}
-              style={{
-                backgroundColor: "#212529",
-                color: "#dedede",
-              }}
-            >
-              Download on iOS
-              <FaApple size={20} />
-            </Link>
-
-            {/* Android Download Button */}
-            <Link
-              href="https://play.google.com/store/apps/details?id=com.utkarshuppal.Echo"
-              target="_blank"
-              className={`${geist.className} px-8 py-4 rounded-full text-[#dedede] font-medium text-lg transition-all duration-200 ease-in-out hover:scale-105 active:scale-95 flex items-center gap-2`}
-              style={{
-                backgroundColor: "#212529",
-                color: "#dedede",
-              }}
-            >
-              Download on Android
-              <FaAndroid size={20} />
-            </Link>
-          </div>
-
-          {/* QR Code */}
-          <div className="mt-4">
-            <Image
-              src="/qrcode.png"
-              alt="QR Code"
-              width={200}
-              height={200}
-              className="rounded-lg"
-            />
-          </div>
-
-          {/* Social Media Buttons */}
-          <div className="flex gap-4 mt-6">
-            <Link
-              href="https://instagram.com/echodotapp"
-              target="_blank"
-              className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ease-in-out hover:scale-110 active:scale-95"
-              style={{ backgroundColor: "#212529" }}
-            >
-              <RiInstagramFill className="text-[#dedede] w-6 h-6" />
-            </Link>
-            <Link
-              href="https://twitter.com/echodotapp"
-              target="_blank"
-              className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ease-in-out hover:scale-110 active:scale-95"
-              style={{ backgroundColor: "#212529" }}
-            >
-              <FaXTwitter className="text-[#dedede] w-5 h-5" />
-            </Link>
-            <Link
-              href="https://discord.gg/YBEyaEd2dG"
-              target="_blank"
-              className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ease-in-out hover:scale-110 active:scale-95"
-              style={{ backgroundColor: "#212529" }}
-            >
-              <FaDiscord className="text-[#dedede] w-6 h-6" />
-            </Link>
-            <Link
-              href="https://www.reddit.com/r/echorank/"
-              target="_blank"
-              className="w-12 h-12 rounded-full flex items-center justify-center transition-all duration-200 ease-in-out hover:scale-110 active:scale-95"
-              style={{ backgroundColor: "#212529" }}
-            >
-              <FaReddit className="text-[#dedede] w-6 h-6" />
-            </Link>
-          </div>
-        </main>
+        </div>
       </section>
 
-      {/* Footer - Fixed at bottom */}
-      <footer
-        className={`${geist.className} fixed bottom-0 left-0 right-0 text-[#dedede] text-sm py-4 opacity-60 text-center`}
-        style={{ color: "#dedede" }}
-      >
-        <div className="space-x-6">
-          <Link href="/privacy" className="hover:opacity-80">
-            Privacy Policy
-          </Link>
-          <Link href="/support" className="hover:opacity-80">
-            Contact Us
-          </Link>
-          <Link href="/careers" className="hover:opacity-80">
-            Careers
-          </Link>
-          {/* <Link href="/terms" className="hover:opacity-80">
-            Terms of Service
-          </Link> */}
+      {/* ----------------------------------------------------------- Closing */}
+      <section className="mx-auto max-w-2xl px-6 pb-20 text-center">
+        <h2 className="text-balance text-3xl font-bold tracking-[-0.035em] sm:text-4xl">
+          Rank. Rate. Relisten.
+        </h2>
+        <div className="mt-8 flex flex-col items-stretch justify-center gap-3 sm:flex-row sm:items-center">
+          <StoreButtons />
         </div>
-      </footer>
+      </section>
 
-      <Toaster position={isMobile ? "bottom-center" : "top-center"} />
-    </>
+      <SiteFooter />
+    </Surface>
   );
 }

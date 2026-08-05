@@ -1,360 +1,155 @@
-"use client";
-import localFont from "next/font/local";
-import Image from "next/image";
 import Link from "next/link";
-
-const geist = localFont({
-  src: [
-    {
-      path: "../../public/fonts/Geist-Light.otf",
-      weight: "300",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Geist-Regular.otf",
-      weight: "400",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Geist-Medium.otf",
-      weight: "500",
-      style: "normal",
-    },
-    {
-      path: "../../public/fonts/Geist-SemiBold.otf",
-      weight: "600",
-      style: "normal",
-    },
-  ],
-});
+import { PageShell } from "@/components/site";
 
 export default function Privacy() {
   return (
-    <>
-      <section
-        className="w-screen min-h-screen bg-[#121212]"
-        style={{ backgroundColor: "#121212" }}
-      >
-        <div className="max-w-4xl mx-auto px-6 py-12">
-          <div className="flex items-center gap-4 mb-8">
-            <Link href="/">
-              <Image
-                src="/Echo.png"
-                alt="Echo Logo"
-                width={50}
-                height={50}
-                className="brightness-0 invert -ml-3 cursor-pointer hover:opacity-80 transition-opacity"
-                style={{ filter: "brightness(0) invert(1)" }}
-              />
-            </Link>
-            <h1
-              className={`${geist.className} font-semibold tracking-tight text-[#dedede] text-3xl`}
-              style={{ color: "#dedede" }}
-            >
-              Privacy Policy
-            </h1>
-          </div>
+    <PageShell title="Privacy Policy" meta="Last updated: March 25, 2025">
+      <h2>Introduction</h2>
+      <p>
+        Welcome to Echo (&ldquo;we,&rdquo; &ldquo;our,&rdquo; or
+        &ldquo;us&rdquo;). Echo is a social platform for ranking, reviewing, and
+        discovering music. This policy explains what information we collect, how
+        we use it, and the choices you have. By using Echo, you agree to the
+        practices described here.
+      </p>
 
-          <div className="prose prose-invert max-w-none">
-            <p
-              className={`${geist.className} text-sm text-[#dedede] opacity-60`}
-              style={{ color: "#dedede" }}
-            >
-              Last Updated: March 25, 2025
-            </p>
+      <h2>Information We Collect</h2>
+      <ul>
+        <li>
+          <strong>Account Information:</strong> name, username, email, phone
+          number, profile picture, and general location
+        </li>
+        <li>
+          <strong>Music Data:</strong> your Apple Music connection, listening
+          activity, and library details you choose to sync
+        </li>
+        <li>
+          <strong>Content You Create:</strong> rankings, scores, reviews,
+          comments, lists, collections, photos, and anything else you share on
+          Echo
+        </li>
+        <li>
+          <strong>Activity &amp; Usage Data:</strong> how you use the app,
+          including features used, content you interact with, searches, and time
+          spent
+        </li>
+        <li>
+          <strong>Device Information:</strong> device type, OS version,
+          language, and identifiers
+        </li>
+        <li>
+          <strong>Information from Partners:</strong> information we receive
+          from services you connect to Echo or from partners we work with
+        </li>
+      </ul>
 
-            <h2
-              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
-              style={{ color: "#dedede" }}
-            >
-              1. Introduction
-            </h2>
-            <p
-              className={`${geist.className} text-[#dedede] opacity-90`}
-              style={{ color: "#dedede" }}
-            >
-              Thank you for being a user of Echo ("we," "our," or "us"). We
-              prioritize the protection of your data and are committed to
-              transparency in our data handling practices. The information we
-              collect is used specifically to enhance app functionality, improve
-              user experience, and maintain service quality.
-            </p>
+      <h2>How We Use Your Information</h2>
+      <ul>
+        <li>Provide, personalize, and improve Echo</li>
+        <li>Power rankings, recommendations, charts, and community features</li>
+        <li>Build new features, products, and services</li>
+        <li>
+          Create insights and trends from community activity, such as charts and
+          listening statistics
+        </li>
+        <li>Keep Echo safe, secure, and free of spam</li>
+        <li>
+          Communicate with you about your account and what&rsquo;s new on Echo
+        </li>
+      </ul>
 
-            <h2
-              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
-              style={{ color: "#dedede" }}
-            >
-              2. Definitions
-            </h2>
-            <ul
-              className={`${geist.className} list-disc pl-5 text-[#dedede] opacity-90`}
-              style={{ color: "#dedede" }}
-            >
-              <li>
-                <strong>Account:</strong> Your unique account created to access
-                our Service
-              </li>
-              <li>
-                <strong>Application:</strong> Echo, our music ranking and social
-                platform
-              </li>
-              <li>
-                <strong>Device:</strong> Any device that can access the Service
-                (computer, mobile phone, tablet)
-              </li>
-              <li>
-                <strong>Personal Data:</strong> Information relating to an
-                identified or identifiable individual
-              </li>
-              <li>
-                <strong>Service Provider:</strong> Third parties processing data
-                on our behalf (including Supabase and Google Cloud Platform)
-              </li>
-              <li>
-                <strong>Usage Data:</strong> Data collected automatically
-                through use of the Service
-              </li>
-            </ul>
+      <h2>How We Share &amp; License Information</h2>
+      <p>
+        Music is better shared — that&rsquo;s the whole idea behind Echo.
+      </p>
+      <p>Here&rsquo;s how information moves through the platform:</p>
+      <ul>
+        <li>
+          <strong>With other users:</strong> your profile, rankings, reviews,
+          and activity, based on your privacy settings
+        </li>
+        <li>
+          <strong>With service providers:</strong> companies that help us run
+          Echo, like hosting, analytics, and communications
+        </li>
+        <li>
+          <strong>With partners:</strong> we may share or license information
+          collected on Echo and insights derived from it — such as charts,
+          rankings, and listening trends — to improve Echo, support how we
+          operate, and build new music experiences; where practical, we use
+          aggregated or de-identified data that doesn&rsquo;t identify you
+          personally
+        </li>
+        <li>
+          <strong>For legal reasons:</strong> when required by law or to protect
+          Echo and our users
+        </li>
+        <li>
+          <strong>As part of a business change:</strong> if Echo is involved in
+          a merger, acquisition, or sale, information may transfer as part of
+          that transaction
+        </li>
+      </ul>
 
-            <h2
-              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
-              style={{ color: "#dedede" }}
-            >
-              3. Information We Collect
-            </h2>
-            <ul
-              className={`${geist.className} list-disc pl-5 text-[#dedede] opacity-90`}
-              style={{ color: "#dedede" }}
-            >
-              <li>
-                Account Information: Name, email, phone number, profile picture,
-                and location
-              </li>
-              <li>
-                Music Service Data: Spotify and Apple Music connection data and
-                listening history
-              </li>
-              <li>
-                User Content: Rankings, reviews, and other content you create
-              </li>
-              <li>
-                Usage Data: How you interact with our app, including features
-                used and time spent
-              </li>
-              <li>
-                Device Information: Device type, OS version, and unique
-                identifiers
-              </li>
-              <li>
-                With your permission: Location data, contacts (phone book), and
-                photos
-              </li>
-            </ul>
+      <h2>Your Content</h2>
+      <p>
+        You own what you create on Echo. By posting, you give us permission to
+        host, display, adapt, and share your content and license it as part of
+        operating, promoting, and improving Echo — for example, showing your
+        review to friends, featuring a great ranking, or including your scores
+        in community charts. The full license is in our{" "}
+        <Link href="/terms">Terms of Service</Link>.
+      </p>
 
-            <h2
-              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
-              style={{ color: "#dedede" }}
-            >
-              4. How We Use Your Information
-            </h2>
-            <ul
-              className={`${geist.className} list-disc pl-5 text-[#dedede] opacity-90`}
-              style={{ color: "#dedede" }}
-            >
-              <li>Provide and improve our services</li>
-              <li>Personalize your experience</li>
-              <li>Process your music rankings and social interactions</li>
-              <li>Send important notifications about your account</li>
-              <li>Analyze usage patterns to improve our platform</li>
-              <li>Maintain and optimize our infrastructure</li>
-            </ul>
+      <h2>Your Choices &amp; Rights</h2>
+      <p>You can:</p>
+      <ul>
+        <li>
+          <strong>Access and update</strong> your profile and account
+          information anytime
+        </li>
+        <li>
+          <strong>Control visibility</strong> of your activity through your
+          privacy settings
+        </li>
+        <li>
+          <strong>Delete</strong> your account and associated data from Settings
+        </li>
+        <li>
+          <strong>Ask us</strong> to access, correct, or export your data by
+          contacting us
+        </li>
+      </ul>
 
-            <h2
-              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
-              style={{ color: "#dedede" }}
-            >
-              5. Data Storage and Processing
-            </h2>
-            <p
-              className={`${geist.className} text-[#dedede] opacity-90`}
-              style={{ color: "#dedede" }}
-            >
-              We use Supabase for database services and Google Cloud Platform
-              (GCP) for our backend infrastructure. Your data may be processed
-              or stored in countries outside your own. We ensure all transfers
-              are protected using appropriate safeguards and security measures.
-            </p>
+      <h2>Third-Party Services</h2>
+      <p>
+        Echo connects with Apple Music to search music, sync your listening, and
+        power playback features. Apple&rsquo;s own terms and privacy policy
+        apply to their services. We also rely on trusted providers for things
+        like infrastructure, analytics, and notifications.
+      </p>
 
-            <h2
-              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
-              style={{ color: "#dedede" }}
-            >
-              6. Data Sharing and Disclosure
-            </h2>
-            <p
-              className={`${geist.className} text-[#dedede] opacity-90`}
-              style={{ color: "#dedede" }}
-            >
-              We share your information with:
-            </p>
-            <ul
-              className={`${geist.className} list-disc pl-5 text-[#dedede] opacity-90`}
-              style={{ color: "#dedede" }}
-            >
-              <li>Other Echo users (based on your privacy settings)</li>
-              <li>
-                Service providers (Supabase, GCP) who assist our operations
-              </li>
-              <li>
-                Music streaming partners (Spotify/Apple Music) as necessary
-              </li>
-              <li>Law enforcement when required by law</li>
-              <li>Business partners (with your explicit consent)</li>
-              <li>During business transfers or acquisitions</li>
-            </ul>
+      <h2>Data Retention &amp; Security</h2>
+      <p>
+        We keep your information while your account is active and as long as
+        needed to run Echo, comply with the law, and resolve disputes. We use
+        industry-standard safeguards to protect your data. Aggregated or
+        de-identified information may be retained and used after your account is
+        deleted.
+      </p>
 
-            <h2
-              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
-              style={{ color: "#dedede" }}
-            >
-              7. Your Privacy Rights
-            </h2>
-            <p
-              className={`${geist.className} text-[#dedede] opacity-90`}
-              style={{ color: "#dedede" }}
-            >
-              You have the right to:
-            </p>
-            <ul
-              className={`${geist.className} list-disc pl-5 text-[#dedede] opacity-90`}
-              style={{ color: "#dedede" }}
-            >
-              <li>Access your personal data</li>
-              <li>Correct inaccurate data</li>
-              <li>Delete your account and data</li>
-              <li>Object to data processing</li>
-              <li>Export your data</li>
-              <li>Withdraw consent at any time</li>
-            </ul>
+      <h2>Changes to This Policy</h2>
+      <p>
+        We may update this policy as Echo evolves. We&rsquo;ll post updates here
+        and, for significant changes, let you know in the app. Continuing to use
+        Echo after an update means you accept the revised policy.
+      </p>
 
-            <h2
-              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
-              style={{ color: "#dedede" }}
-            >
-              8. Data Security
-            </h2>
-            <p
-              className={`${geist.className} text-[#dedede] opacity-90`}
-              style={{ color: "#dedede" }}
-            >
-              We implement industry-standard security measures through our
-              service providers (Supabase and GCP) to protect your personal
-              information against unauthorized access, alteration, disclosure,
-              or destruction. However, no method of transmission over the
-              internet is 100% secure.
-            </p>
-
-            <h2
-              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
-              style={{ color: "#dedede" }}
-            >
-              9. Data Retention
-            </h2>
-            <p
-              className={`${geist.className} text-[#dedede] opacity-90`}
-              style={{ color: "#dedede" }}
-            >
-              We retain your data only as long as necessary to fulfill the
-              purposes outlined in this policy or to comply with legal
-              obligations. You can request deletion of your account and
-              associated data at any time.
-            </p>
-
-            <h2
-              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
-              style={{ color: "#dedede" }}
-            >
-              10. Children's Privacy
-            </h2>
-            <p
-              className={`${geist.className} text-[#dedede] opacity-90`}
-              style={{ color: "#dedede" }}
-            >
-              Our services are not intended for users under the age of 13. We do
-              not knowingly collect personal information from children under 13.
-              If we become aware of such data, we will delete it immediately.
-            </p>
-
-            <h2
-              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
-              style={{ color: "#dedede" }}
-            >
-              11. Changes to This Policy
-            </h2>
-            <p
-              className={`${geist.className} text-[#dedede] opacity-90`}
-              style={{ color: "#dedede" }}
-            >
-              We may update this Privacy Policy from time to time. We will
-              notify you of any significant changes via email or in-app
-              notification and update the "Last Updated" date at the top of this
-              page.
-            </p>
-
-            <h2
-              className={`${geist.className} text-xl font-semibold text-[#dedede] mt-8 mb-4`}
-              style={{ color: "#dedede" }}
-            >
-              12. Contact Us
-            </h2>
-            <p
-              className={`${geist.className} text-[#dedede] opacity-90`}
-              style={{ color: "#dedede" }}
-            >
-              If you have any questions about this Privacy Policy, please
-              contact us at:{" "}
-              <Link
-                href="mailto:utkarsh@echorank.app"
-                className={`${geist.className} text-[#dedede] underline hover:opacity-80`}
-                style={{ color: "#dedede" }}
-              >
-                utkarsh@echorank.app
-              </Link>
-            </p>
-
-            <div className="mt-12 pt-8 border-t border-[#333]">
-              <Link
-                href="/"
-                className={`${geist.className} text-[#dedede] hover:opacity-80`}
-                style={{ color: "#dedede" }}
-              >
-                ← Back to Home
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Footer - Fixed at bottom */}
-      <footer
-        className={`${geist.className} fixed bottom-0 left-0 right-0 text-[#dedede] text-sm py-4 opacity-60 text-center`}
-        style={{ color: "#dedede" }}
-      >
-        <div className="space-x-6">
-          <Link href="/privacy" className="hover:opacity-80">
-            Privacy Policy
-          </Link>
-          <Link href="/support" className="hover:opacity-80">
-            Contact Us
-          </Link>
-          <Link href="/careers" className="hover:opacity-80">
-            Careers
-          </Link>
-          {/* <Link href="/terms" className="hover:opacity-80">
-            Terms of Service
-          </Link> */}
-        </div>
-      </footer>
-    </>
+      <h2>Contact</h2>
+      <p>
+        Questions? Contact us at{" "}
+        <Link href="mailto:utkarsh@echorank.app">utkarsh@echorank.app</Link>.
+      </p>
+    </PageShell>
   );
 }
