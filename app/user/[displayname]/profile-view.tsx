@@ -36,7 +36,7 @@ const formatCount = (n: number): string => {
 };
 
 const formatScore = (score: number): string =>
-  Number.isInteger(score) ? String(score) : score.toFixed(1);
+  score >= 10 ? "10" : score.toFixed(1);
 
 const timeAgoLabel = (playedAt: string): string => {
   const played = Date.parse(playedAt);
