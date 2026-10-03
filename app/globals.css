@@ -140,3 +140,275 @@
 .canvas-live-dot {
   animation: canvas-live-pulse 1.8s ease-in-out infinite;
 }
+
+/* ------------------------------------------------------------ Hunch 1.0 */
+
+/* Type from the launch film: HUNCH in the system mono, supporting lines in
+   SF Pro Display (Geist where SF isn't installed), scores in Bricolage. */
+.font-hunch {
+  font-family: ui-monospace, "SF Mono", SFMono-Regular, Menlo, Consolas, monospace;
+}
+.font-display-sf {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", var(--font-geist), system-ui, sans-serif;
+  letter-spacing: -0.015em;
+}
+.font-score {
+  font-family: var(--font-bricolage), sans-serif;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.02em;
+}
+
+.hunch-stage {
+  background: #0b0b0c;
+  isolation: isolate;
+}
+/* Slow phthalo and sage fields behind the black, the film's wallpaper turned down. */
+.hunch-field {
+  position: absolute;
+  inset: -30%;
+  z-index: -1;
+  background:
+    radial-gradient(38% 34% at 28% 70%, rgba(18, 53, 36, 0.9), transparent 70%),
+    radial-gradient(30% 30% at 74% 30%, rgba(126, 190, 181, 0.16), transparent 70%),
+    radial-gradient(40% 36% at 70% 82%, rgba(26, 47, 56, 0.8), transparent 70%);
+  animation: hunch-drift 22s ease-in-out infinite alternate;
+}
+@keyframes hunch-drift {
+  to {
+    transform: translate3d(4%, -3%, 0) rotate(6deg);
+  }
+}
+
+/* Dot swells and becomes the Echo mark. */
+.hunch-dot {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 22px;
+  height: 22px;
+  margin: -11px 0 0 -11px;
+  border-radius: 999px;
+  background: #fff;
+  opacity: 0;
+  animation: hunch-dot 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes hunch-dot {
+  0% { opacity: 0; transform: scale(0); }
+  14% { opacity: 1; transform: scale(1.12); }
+  22%, 34% { opacity: 1; transform: scale(1); filter: blur(0); }
+  52% { opacity: 1; transform: scale(3.4); filter: blur(2px); }
+  62%, 100% { opacity: 0; transform: scale(3.8); filter: blur(10px); }
+}
+.hunch-mark {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  filter: invert(1);
+  animation: hunch-mark 1.5s cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
+@keyframes hunch-mark {
+  0%, 40% { opacity: 0; transform: scale(0.5); filter: invert(1) blur(12px); }
+  60% { opacity: 1; transform: scale(1.07); filter: invert(1) blur(0); }
+  72%, 100% { opacity: 1; transform: scale(1); filter: invert(1) blur(0); }
+}
+.hunch-in {
+  animation: hunch-in 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+@keyframes hunch-in {
+  from { opacity: 0; transform: translateY(16px); filter: blur(8px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+
+/* Learn: scores stamp on eighth notes, then threads draw. 8 s loop. */
+.hx-thread path { stroke-dasharray: 1; stroke-dashoffset: 0; }
+[data-run] .hx-stamp { animation: hx-stamp 8s var(--d) infinite both cubic-bezier(0.2, 0.8, 0.2, 1); }
+[data-run] .hx-thread path { animation: hx-draw 8s infinite both cubic-bezier(0.65, 0, 0.35, 1); }
+[data-run] .hx-thread circle { animation: hx-ends 8s infinite both; }
+[data-run] .hx-chip { animation: hx-chip 8s infinite both cubic-bezier(0.2, 0.8, 0.2, 1); }
+@keyframes hx-stamp {
+  0% { opacity: 0; transform: translate(-50%, 0) scale(0.3); }
+  3% { opacity: 1; transform: translate(-50%, 0) scale(1.16); }
+  6%, 80% { opacity: 1; transform: translate(-50%, 0) scale(1); }
+  88%, 100% { opacity: 0; transform: translate(-50%, 4px) scale(0.9); }
+}
+@keyframes hx-draw {
+  0%, 38% { stroke-dashoffset: 1; opacity: 1; }
+  50%, 84% { stroke-dashoffset: 0; opacity: 1; }
+  92%, 100% { stroke-dashoffset: 0; opacity: 0; }
+}
+@keyframes hx-ends {
+  0%, 37% { opacity: 0; }
+  40%, 84% { opacity: 1; }
+  92%, 100% { opacity: 0; }
+}
+@keyframes hx-chip {
+  0%, 49% { opacity: 0; transform: translate(-50%, -50%) scale(0.6); }
+  53% { opacity: 1; transform: translate(-50%, -50%) scale(1.08); }
+  56%, 84% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+  92%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.9); }
+}
+
+/* Listeners: droplets that rate like you merge into yours; the rest drift off. 9 s loop. */
+.hx-merge, .hx-away, .hx-you { transform-box: fill-box; transform-origin: center; }
+[data-run] .hx-merge { animation: hx-merge 9s calc(1.2s + var(--d)) infinite both cubic-bezier(0.34, 1.15, 0.64, 1); }
+[data-run] .hx-away { animation: hx-away 9s infinite both cubic-bezier(0.4, 0, 0.2, 1); }
+[data-run] .hx-you { animation: hx-you 9s infinite both cubic-bezier(0.34, 1.3, 0.64, 1); }
+[data-run] .hx-bob { animation: hx-bob 3.2s var(--b) ease-in-out infinite alternate; }
+@keyframes hx-merge {
+  0% { opacity: 0; transform: none; }
+  4%, 10% { opacity: 1; transform: none; }
+  19%, 80% { opacity: 1; transform: translate(var(--dx), var(--dy)) scale(0.5); }
+  84%, 100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.5); }
+}
+@keyframes hx-away {
+  0% { opacity: 0; transform: none; }
+  5%, 26% { opacity: 1; transform: none; }
+  44%, 84% { opacity: 1; transform: translate(var(--ox), var(--oy)) scale(0.6); }
+  92%, 100% { opacity: 0; transform: translate(var(--ox), var(--oy)) scale(0.6); }
+}
+@keyframes hx-you {
+  0%, 30% { transform: scale(1); }
+  50% { transform: scale(1.32); }
+  54% { transform: scale(1.46); }
+  58%, 84% { transform: scale(1.34); }
+  94%, 100% { transform: scale(1); }
+}
+@keyframes hx-bob {
+  to { transform: translateY(-5px); }
+}
+
+/* Predict: Global lands, the reticle hunts and locks, Hunch appears whole,
+   the pointer taps Yours. 10 s loop; Yours counts up in script. */
+.hx-reticle {
+  opacity: 0;
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 12px 30px rgba(0, 0, 0, 0.22),
+    0 0 0 1px rgba(43, 31, 39, 0.12),
+    inset 2px 2px 0 rgba(255, 255, 255, 0.9),
+    inset -1px -1px 0 rgba(255, 255, 255, 0.45),
+    inset 0 0 0 1.5px rgba(255, 255, 255, 0.55),
+    inset 0 0 22px rgba(255, 255, 255, 0.35);
+}
+.hx-skeleton, .hx-pointer { opacity: 0; }
+.hx-hunch { transform-origin: left center; }
+.hx-global { transform-origin: left center; }
+[data-run] .hx-reticle { animation: hx-ret 10s infinite both cubic-bezier(0.3, 1.1, 0.5, 1); }
+[data-run] .hx-reticle-art { animation: hx-ret-art 10s infinite both cubic-bezier(0.3, 1.1, 0.5, 1); }
+[data-run] .hx-reticle-icon { animation: hx-ret-icon 10s infinite both; }
+[data-run] .hx-label-icon { animation: hx-label-icon 10s infinite both; }
+[data-run] .hx-skeleton { animation: hx-skeleton 10s infinite both; }
+[data-run] .hx-hunch { animation: hx-hunch 10s infinite both; }
+[data-run] .hx-global { animation: hx-global 10s infinite both; }
+[data-run] .hx-delta { animation: hx-delta 10s infinite both; }
+[data-run] .hx-pointer { animation: hx-pointer 10s infinite both cubic-bezier(0.3, 1, 0.4, 1); }
+@keyframes hx-ret {
+  0%, 11% { opacity: 0; transform: translate(0.8cqw, 42.5cqw) scale(0.22); }
+  12% { opacity: 1; transform: translate(0.8cqw, 42.5cqw) scale(0.22); }
+  18% { opacity: 1; transform: translate(14cqw, 14cqw) scale(1); }
+  24% { transform: translate(32cqw, 18cqw) scale(1); }
+  29% { transform: translate(16cqw, 22cqw) scale(1); }
+  34% { opacity: 1; transform: translate(7.5cqw, 48.7cqw) scale(0.85); }
+  35.5% { opacity: 1; transform: translate(7.5cqw, 48.7cqw) scale(0.95); }
+  39%, 100% { opacity: 0; transform: translate(7.5cqw, 48.7cqw) scale(1.3); }
+}
+@keyframes hx-ret-art {
+  0%, 12% { transform: translate(5.7cqw, -51cqw); }
+  18% { transform: translate(-12.25cqw, -12.25cqw); }
+  24% { transform: translate(-36.55cqw, -17.65cqw); }
+  29% { transform: translate(-14.95cqw, -23.05cqw); }
+  34%, 100% { transform: translate(-2.8cqw, -61.5cqw); }
+}
+@keyframes hx-ret-icon {
+  0%, 29% { color: #fff; }
+  33%, 100% { color: #212529; }
+}
+@keyframes hx-label-icon {
+  0%, 11% { opacity: 1; }
+  12%, 37% { opacity: 0; }
+  41%, 100% { opacity: 1; }
+}
+@keyframes hx-skeleton {
+  0%, 34% { opacity: 1; }
+  34.5%, 95% { opacity: 0; }
+  99%, 100% { opacity: 1; }
+}
+@keyframes hx-hunch {
+  0%, 34.4% { opacity: 0; transform: scale(1); }
+  34.5% { opacity: 1; transform: scale(1.22); }
+  38% { transform: scale(0.97); }
+  40%, 90% { opacity: 1; transform: scale(1); }
+  95%, 100% { opacity: 0; transform: scale(1); }
+}
+@keyframes hx-global {
+  0%, 6% { opacity: 0; transform: scale(1); }
+  6.5% { opacity: 1; transform: scale(1.1); }
+  9%, 90% { opacity: 1; transform: scale(1); }
+  95%, 100% { opacity: 0; }
+}
+@keyframes hx-delta {
+  0%, 62% { opacity: 0; transform: translateY(6px); }
+  66%, 90% { opacity: 1; transform: none; }
+  95%, 100% { opacity: 0; }
+}
+@keyframes hx-pointer {
+  0%, 41% { opacity: 0; transform: translate(84cqw, 76cqw); }
+  43% { opacity: 1; }
+  47% { opacity: 1; transform: translate(68.8cqw, 56.5cqw) scale(1); }
+  49% { transform: translate(68.8cqw, 56.5cqw) scale(0.9); }
+  50.5% { opacity: 1; transform: translate(68.8cqw, 56.5cqw) scale(1); }
+  54%, 100% { opacity: 0; transform: translate(68.8cqw, 56.5cqw) scale(1); }
+}
+
+/* Private: the toggle goes off, the score hides; back on. 6 s loop. */
+.hx-toggle { background: #123524; }
+.hx-knob { transform: translateX(20px); }
+.hx-hidden { opacity: 0; }
+[data-run] .hx-toggle { animation: hx-toggle 6s infinite both; }
+[data-run] .hx-knob { animation: hx-knob 6s infinite both cubic-bezier(0.34, 1.3, 0.64, 1); }
+[data-run] .hx-shown { animation: hx-shown 6s infinite both; }
+[data-run] .hx-hidden { animation: hx-hidden 6s infinite both; }
+@keyframes hx-toggle {
+  0%, 38% { background: #123524; }
+  42%, 72% { background: #e9e9eb; }
+  76%, 100% { background: #123524; }
+}
+@keyframes hx-knob {
+  0%, 38% { transform: translateX(20px); }
+  44%, 72% { transform: translateX(0); }
+  78%, 100% { transform: translateX(20px); }
+}
+@keyframes hx-shown {
+  0%, 39% { opacity: 1; filter: blur(0); }
+  43%, 73% { opacity: 0; filter: blur(6px); }
+  77%, 100% { opacity: 1; filter: blur(0); }
+}
+@keyframes hx-hidden {
+  0%, 39% { opacity: 0; }
+  43%, 73% { opacity: 1; }
+  77%, 100% { opacity: 0; }
+}
+
+.hx-card { animation: hx-card 0.5s cubic-bezier(0.16, 1, 0.3, 1) both; }
+@keyframes hx-card {
+  from { opacity: 0; transform: translateY(10px); filter: blur(6px); }
+  to { opacity: 1; transform: none; filter: blur(0); }
+}
+.hx-pop { animation: hx-pop 0.45s cubic-bezier(0.34, 1.4, 0.64, 1) both; }
+@keyframes hx-pop {
+  from { opacity: 0.4; transform: scale(0.9); }
+  to { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hunch-page *,
+  .hunch-page *::before,
+  .hunch-page *::after {
+    animation: none !important;
+    transition: none !important;
+  }
+  .hunch-page .hunch-dot { opacity: 0; }
+}

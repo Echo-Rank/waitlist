@@ -69,7 +69,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={geist.className}>{children}</body>
+      <body className={`${geist.className} ${geist.variable}`}>{children}</body>
     </html>
   );
 }

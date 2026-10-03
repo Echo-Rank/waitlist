@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import {
   EchoLockup,
   SiteFooter,
@@ -35,7 +36,16 @@ export default function Home() {
     <Surface>
       {/* ------------------------------------------------------------- Hero */}
       <header className="mx-auto flex max-w-3xl flex-col items-center px-6 pb-16 pt-24 text-center sm:pt-28">
-        <div className="rise">
+        <Link
+          href="/hunch"
+          className="rise group mb-10 flex items-center gap-2 rounded-full bg-white/60 py-1.5 pl-4 pr-3 text-sm text-[#6A5F6D] ring-1 ring-inset ring-[#2B1F27]/[0.07] backdrop-blur transition duration-200 hover:-translate-y-0.5 hover:bg-white"
+        >
+          <span className="sm:hidden">Meet</span>
+          <span className="font-hunch whitespace-nowrap font-semibold tracking-[0.04em] text-[#2B1F27]">HUNCH 1.0</span>
+          <span className="hidden sm:inline">Echo’s new recommendation model</span>
+          <span aria-hidden className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+        </Link>
+        <div className="rise" style={{ animationDelay: "30ms" }}>
           <EchoLockup size="lg" />
         </div>
 

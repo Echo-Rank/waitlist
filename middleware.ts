@@ -1,12 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export const config = {
-  matcher: ["/profile/:path*"],
+  matcher: ["/profile/:path*", "/Hunch"],
 };
 
 export default function middleware(req: NextRequest) {
   // Gets the path from the request
   const { pathname } = req.nextUrl;
+
+  // Matchers ignore case, so check it here: /Hunch → /hunch, /hunch passes.
+  if (pathname === "/Hunch") {
+    return NextResponse.redirect(new URL("/hunch", req.url), 308);
+  }
 
   // For profile routes, we want to ensure proper formatting
   if (pathname.startsWith("/profile/")) {
